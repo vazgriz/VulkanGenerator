@@ -6,11 +6,13 @@ namespace VulkanGenerator {
         public string Name { get; set; }
         public List<Field> Fields { get; set; }
         public bool Union { get; set; }
+        public bool Handle { get; set; }
 
         public Struct(string name, List<Field> fields, bool union) {
             Name = name;
             Fields = fields;
             Union = union;
+            Handle = false;
         }
     }
 

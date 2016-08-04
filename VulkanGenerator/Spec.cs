@@ -82,6 +82,7 @@ namespace VulkanGenerator {
                         List<Field> fields = new List<Field>();
                         fields.Add(new Field("native", "IntPtr", false));
                         var s = new Struct(name, fields, false);
+                        s.Handle = true;
                         Structs.Add(s);
                     } else if (cat == "enum") {
                         var eName = node.Attributes["name"].Value;

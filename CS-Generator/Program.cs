@@ -16,7 +16,7 @@ namespace CS_Generator {
                 "VK_KHR_win32_surface",
                 "VK_EXT_debug_report",
             };
-            string output = @"F:\Code\CSVK\CSVK\VK";
+            string output = @"F:\Code\CSharpGameLibrary\CSharpGameLibrary\Vulkan";
             if (!Directory.Exists("output")) Directory.CreateDirectory("output");
             Spec spec;
             using (var reader = File.Open("vk.xml", FileMode.Open)) {
@@ -25,10 +25,10 @@ namespace CS_Generator {
                 spec = new Spec(doc, 1, 0, extensions);
             }
             Generator g = new Generator(spec);
-            g.WriteEnums(output, "Vulkan");
-            g.WriteCommands(output, "Vulkan.Unmanaged");
-            g.WriteStructs(output, "Vulkan.Unmanaged");
-            g.WriteLoader(output, "Vulkan.Unmanaged");
+            g.WriteEnums(output, "CSGL.Vulkan");
+            g.WriteCommands(output, "CSGL.Vulkan.Unmanaged");
+            g.WriteStructs(output, "CSGL.Vulkan.Unmanaged");
+            g.WriteLoader(output, "CSGL.Vulkan.Unmanaged");
         }
     }
 }
