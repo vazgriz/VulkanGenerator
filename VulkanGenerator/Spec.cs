@@ -16,6 +16,7 @@ namespace VulkanGenerator {
         public HashSet<string> IncludedCommands { get; private set; }
         public HashSet<string> IncludedTypes { get; private set; }
         public HashSet<string> ExtensionTypes { get; private set; }
+        public Dictionary<string, string> EnumValuesMap { get; private set; }
 
         public Dictionary<string, Enum> EnumMap { get; private set; }
 
@@ -32,6 +33,7 @@ namespace VulkanGenerator {
             IncludedCommands = new HashSet<string>();
             IncludedTypes = new HashSet<string>();
             ExtensionTypes = new HashSet<string>();
+            EnumValuesMap = new Dictionary<string, string>();
 
             EnumMap = new Dictionary<string, Enum>();
 
@@ -80,7 +82,7 @@ namespace VulkanGenerator {
                     } else if (cat == "handle") {
                         string name = node["name"].InnerText;
                         List<Field> fields = new List<Field>();
-                        fields.Add(new Field("native", "IntPtr", false));
+                        fields.Add(new Field("native", "IntPtr", false, null));
                         var s = new Struct(name, fields, false);
                         s.Handle = true;
                         Structs.Add(s);
@@ -122,13 +124,36 @@ namespace VulkanGenerator {
                 }
             }
 
-            fields.Add(new Field(name, type, pointer));
+            string arraySize = null;
+            if (root.InnerText.Contains("[")) {
+                XmlNode e = root["enum"];
+                if (e == null) {
+                    int start = root.InnerText.IndexOf('[');
+                    int end = root.InnerText.IndexOf(']');
+                    arraySize = root.InnerText.Substring(start + 1, (end - start) - 1);
+                } else {
+                    arraySize = root["enum"].InnerText;
+                }
+            }
+
+            var f = new Field(name, type, pointer, arraySize);
+            fields.Add(f);
         }
 
         void LoadEnums(XmlNode root) {
             string name = root.Attributes["name"].Value;
 
-            if (name == "API Constants") return;
+            if (name == "API Constants") {
+                foreach (XmlNode node in root.ChildNodes) {
+                    if (node is XmlComment) continue;
+                    if (node.Name != "enum") continue;
+                    string vName = node.Attributes["name"].Value;
+                    var att = node.Attributes["value"] ?? node.Attributes["bitpos"];
+                    string value = att.Value;
+                    EnumValuesMap.Add(vName, value);
+                }
+                return;
+            }
             List<EnumValue> values = new List<EnumValue>();
             foreach (XmlNode node in root.ChildNodes) {
                 if (node is XmlComment) continue;
@@ -138,6 +163,7 @@ namespace VulkanGenerator {
                 string value = att.Value;
                 var v = new EnumValue(vName, value);
                 values.Add(v);
+                EnumValuesMap.Add(vName, value);
             }
             bool bitmask = root.Attributes["type"].Value == "bitmask";
             var e = EnumMap[name];
@@ -171,12 +197,12 @@ namespace VulkanGenerator {
         Param LoadParam(XmlNode root) {
             string name = root["name"].InnerText;
             string type = root["type"].InnerText;
-            bool pointer = false;
+            int pointer = 0;
 
             foreach (char c in root.InnerText) {
                 if (c == '*') {
                     type += c;
-                    pointer = true;
+                    pointer++;
                 }
             }
 

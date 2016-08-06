@@ -20,11 +20,13 @@ namespace VulkanGenerator {
         public string Name { get; set; }
         public string Type { get; set; }
         public bool Pointer { get; set; }
+        public string ArraySize { get; set; }
 
-        public Field(string name, string type, bool pointer) {
+        public Field(string name, string type, bool pointer, string arraySize) {
             Name = name;
             Type = type;
             Pointer = pointer;
+            ArraySize = arraySize;
         }
     }
 }

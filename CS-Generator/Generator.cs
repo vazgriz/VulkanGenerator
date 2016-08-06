@@ -64,30 +64,42 @@ namespace CS_Generator {
                 writer.WriteLine("namespace {0} {{", _namespace);
                 writer.WriteLine("    public static partial class VK {");
 
+                foreach (Command c in spec.Commands) {
+                    if (!spec.IncludedCommands.Contains(c.Name)) continue;
+                    writer.WriteLine("        public static{0} {1}Delegate {2};", "", c.Name, c.Name.Substring(2));
+                }
+
+                writer.WriteLine("    }");
+
                 foreach (var c in spec.Commands) {
                     if (!spec.IncludedCommands.Contains(c.Name)) continue;
 
                     string _unsafe = "";
                     foreach (var p in c.Params) {
-                        if (p.Pointer) {
+                        if (p.Pointer > 1 || p.Type == "void*") {
                             _unsafe = " unsafe";
                         }
                     }
 
-                    writer.Write("        public{0} delegate {1} {2}Delegate(", _unsafe, GetType(c), c.Name);
+                    writer.Write("    public{0} delegate {1} {2}Delegate(", _unsafe, GetType(c), c.Name);
 
                     for (int i = 0; i < c.Params.Count; i++) {
                         var p = c.Params[i];
-                        writer.Write("{0} {1}", GetType(p), GetName(p));
+                        string type = GetType(p);
+                        if (type != "void*") {
+                            if (p.Pointer == 1) {
+                                writer.Write("ref ");
+                                type = type.Substring(0, type.Length - 1);
+                            }
+                        }
+                        writer.Write("{0} {1}", type, GetName(p));
                         if (i < c.Params.Count - 1) writer.Write(", ");
                     }
 
                     writer.WriteLine(");");
-                    writer.WriteLine("        public static{0} {1}Delegate {1};", "", c.Name);
                     writer.WriteLine();
                 }
 
-                writer.WriteLine("    }");
                 writer.WriteLine("}");
             }
         }
@@ -107,10 +119,10 @@ namespace CS_Generator {
                         GenerateHandle(writer, s);
                     } else {
                         bool union = s.Union;
-                        string _unsafe = "";
+                        bool _unsafe = false;
                         foreach (var f in s.Fields) {
-                            if (f.Pointer) {
-                                _unsafe = " unsafe";
+                            if (f.Pointer || f.ArraySize != null) {
+                                _unsafe = true;
                                 break;
                             }
                         }
@@ -120,12 +132,43 @@ namespace CS_Generator {
                         } else {
                             writer.WriteLine("    [StructLayout(LayoutKind.Sequential, Pack = 1)]");
                         }
-                        writer.WriteLine("    public{0} struct {1} {{", _unsafe, s.Name);
+                        writer.Write("    public");
+                        if (_unsafe) writer.Write(" unsafe");
+                        writer.Write(" struct {0} {{", s.Name);
+                        writer.WriteLine();
+
                         foreach (var f in s.Fields) {
-                            string fUnsafe = "";
-                            if (f.Pointer) fUnsafe = _unsafe;
+                            bool fieldUnsafe = false;
+                            bool _fixed = false;
+                            string arraySize = "";
+                            string finalType = GetType(f);
+                            bool isPrimitive = IsPrimitive(finalType);
+
                             if (union) writer.WriteLine("        [FieldOffset(0)]");
-                            writer.WriteLine("        public{0} {1} {2};", fUnsafe, GetType(f), GetName(f));
+                            if (f.ArraySize != null) {
+                                _fixed = true;
+                                fieldUnsafe = true;
+                                int dummy;
+                                if (int.TryParse(f.ArraySize, out dummy)) {
+                                    arraySize = f.ArraySize;
+                                } else {
+                                    arraySize = spec.EnumValuesMap[f.ArraySize];
+                                }
+                                if (!isPrimitive) {
+                                    fieldUnsafe = false;
+                                    writer.WriteLine("        [MarshalAs(UnmanagedType.ByValArray, SizeConst = {0})]", arraySize);
+                                }
+                            }
+
+
+                            writer.Write("        public ");
+                            if (fieldUnsafe) writer.Write("unsafe ");
+                            if (_fixed && isPrimitive) writer.Write("fixed ");
+                            writer.Write(finalType);
+                            if (!isPrimitive && _fixed) writer.Write("[]");
+                            writer.Write(" {0}", GetName(f));
+                            if (_fixed && isPrimitive) writer.Write("[{0}]", arraySize);
+                            writer.WriteLine(";");
                         }
                         writer.WriteLine("    }");
                         writer.WriteLine();
@@ -136,40 +179,65 @@ namespace CS_Generator {
             }
         }
 
+        bool IsPrimitive(string input) {
+            if (input == "sbyte" ||
+                input == "short" ||
+                input == "int" ||
+                input == "long" ||
+                input == "byte" ||
+                input == "ushort" ||
+                input == "uint" ||
+                input == "ulong" ||
+                input == "float"
+                ) return true;
+            return false;
+        }
+
         void GenerateHandle(StreamWriter writer, Struct s) {
             writer.WriteLine("    [StructLayout(LayoutKind.Sequential, Pack = 1)]");
-            writer.WriteLine("    public struct {0} : IEquatable<{0}> {{", s.Name);
+            //writer.WriteLine("    public struct {0} : IEquatable<{0}> {{", s.Name);
+            writer.WriteLine("    public struct {0} {{", s.Name);
             foreach (var f in s.Fields) {
                 writer.WriteLine("        public {0} {1};",  GetType(f), GetName(f));
             }
-
-            writer.WriteLine("        public bool Equals({0} other) {{", s.Name);
-            writer.WriteLine("            return native == other.native;");
-            writer.WriteLine("        }");
             writer.WriteLine();
 
-            writer.WriteLine("        public override bool Equals(object other) {");
-            writer.WriteLine("            if (other is {0}) {{", s.Name);
-            writer.WriteLine("                return Equals(({0})other);", s.Name);
-            writer.WriteLine("            }");
-            writer.WriteLine("            return false;");
-            writer.WriteLine("        }");
-            writer.WriteLine();
+            //writer.WriteLine("        public static {0} Null {{ get; }} = new {0}();", s.Name);
+            //writer.WriteLine();
 
-            writer.WriteLine("        public override int GetHashCode() {");
-            writer.WriteLine("            return native.GetHashCode();");
-            writer.WriteLine("        }");
-            writer.WriteLine();
+            //writer.WriteLine("        public bool IsNull {");
+            //writer.WriteLine("            get {");
+            //writer.WriteLine("                return this == Null;");
+            //writer.WriteLine("            }");
+            //writer.WriteLine("        }");
 
-            writer.WriteLine("        public static bool operator == ({0} a, {0} b) {{", s.Name);
-            writer.WriteLine("            return a.Equals(b);");
-            writer.WriteLine("        }");
-            writer.WriteLine();
+            //writer.WriteLine("        public bool Equals({0} other) {{", s.Name);
+            //writer.WriteLine("            return native == other.native;");
+            //writer.WriteLine("        }");
+            //writer.WriteLine();
 
-            writer.WriteLine("        public static bool operator != ({0} a, {0} b) {{", s.Name);
-            writer.WriteLine("            return !a.Equals(b);");
-            writer.WriteLine("        }");
-            writer.WriteLine();
+            //writer.WriteLine("        public override bool Equals(object other) {");
+            //writer.WriteLine("            if (other is {0}) {{", s.Name);
+            //writer.WriteLine("                return Equals(({0})other);", s.Name);
+            //writer.WriteLine("            }");
+            //writer.WriteLine("            return false;");
+            //writer.WriteLine("        }");
+            //writer.WriteLine();
+
+            //writer.WriteLine("        public override int GetHashCode() {");
+            //writer.WriteLine("            return native.GetHashCode();");
+            //writer.WriteLine("        }");
+            //writer.WriteLine();
+
+            //writer.WriteLine("        public static bool operator == ({0} a, {0} b) {{", s.Name);
+            //writer.WriteLine("            return a.Equals(b);");
+            //writer.WriteLine("        }");
+            //writer.WriteLine();
+
+            //writer.WriteLine("        public static bool operator != ({0} a, {0} b) {{", s.Name);
+            //writer.WriteLine("            return !a.Equals(b);");
+            //writer.WriteLine("        }");
+            //writer.WriteLine();
 
             writer.WriteLine("    }");
             writer.WriteLine();
@@ -231,6 +299,7 @@ namespace CS_Generator {
                 case "VkBool32": return "uint";
                 case "VkDeviceSize": return "ulong";
                 case "VkSampleMask": return "uint";
+                case "char": return "byte";
 
                 case "uint8_t": return "byte";
                 case "uint16_t": return "ushort";
@@ -288,6 +357,7 @@ namespace CS_Generator {
                 case "uint16_t": return "ushort";
                 case "uint32_t": return "uint";
                 case "uint64_t": return "ulong";
+                case "char": return "byte";
 
                 case "int8_t": return "sbyte";
                 case "int16_t": return "short";

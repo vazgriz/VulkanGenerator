@@ -28,7 +28,7 @@ namespace CS_Generator {
             g.WriteEnums(output, "CSGL.Vulkan");
             g.WriteCommands(output, "CSGL.Vulkan.Unmanaged");
             g.WriteStructs(output, "CSGL.Vulkan.Unmanaged");
-            g.WriteLoader(output, "CSGL.Vulkan.Unmanaged");
+            //g.WriteLoader(output, "CSGL.Vulkan.Unmanaged");
         }
     }
 }

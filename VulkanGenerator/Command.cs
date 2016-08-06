@@ -19,9 +19,9 @@ namespace VulkanGenerator {
     public class Param {
         public string Name { get; set; }
         public string Type { get; set; }
-        public bool Pointer { get; set; }
+        public int Pointer { get; set; }
 
-        public Param(string name, string type, bool pointer) {
+        public Param(string name, string type, int pointer) {
             Name = name;
             Type = type;
             Pointer = pointer;
