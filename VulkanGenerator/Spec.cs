@@ -161,7 +161,9 @@ namespace VulkanGenerator {
                 string vName = node.Attributes["name"].Value;
                 var att = node.Attributes["value"] ?? node.Attributes["bitpos"];
                 string value = att.Value;
+                bool bitpos = att.Name == "bitpos";
                 var v = new EnumValue(vName, value);
+                v.Bitpos = bitpos;
                 values.Add(v);
                 EnumValuesMap.Add(vName, value);
             }

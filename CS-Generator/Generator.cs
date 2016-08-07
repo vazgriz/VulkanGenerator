@@ -41,10 +41,20 @@ namespace CS_Generator {
 
                 foreach (var e in spec.Enums) {
                     if (!spec.AllEnums.Contains(e.Name)) continue;
+                    if (e.Bitmask) writer.WriteLine("    [Flags]");
                     writer.WriteLine("    public enum {0} {{", GetName(e));
 
                     foreach (var v in e.Values) {
-                        writer.WriteLine("        {0} = {1},", GetName(v), v.Value);
+                        if (e.Bitmask) {
+                            writer.Write("        {0} = ", GetName(v));
+                            if (v.Bitpos) {
+                                writer.WriteLine("{0},", (int)Math.Pow(2, int.Parse(v.Value)));
+                            } else {
+                                writer.WriteLine("{0},", v.Value);
+                            }
+                        } else {
+                            writer.WriteLine("        {0} = {1},", GetName(v), v.Value);
+                        }
                     }
 
                     writer.WriteLine("    }");
@@ -297,11 +307,11 @@ namespace CS_Generator {
             string result = BitsToFlag(field.Type);
 
             if (result.Contains("PFN_")) {
-                result = "IntPtr";
+                return "IntPtr";
             }
             switch (result) {
                 case "size_t": return "long";
-                case "VkBool32": return "uint";
+                case "VkBool32": return "bool";
                 case "VkDeviceSize": return "ulong";
                 case "VkSampleMask": return "uint";
                 case "char": return "byte";

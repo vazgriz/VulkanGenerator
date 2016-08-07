@@ -29,6 +29,7 @@ namespace VulkanGenerator {
     public class EnumValue {
         public string Name { get; set; }
         public string Value { get; set; }
+        public bool Bitpos { get; set; }
 
         public EnumValue(string name, string value) {
             Name = name;
