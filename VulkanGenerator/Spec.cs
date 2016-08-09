@@ -253,6 +253,13 @@ namespace VulkanGenerator {
                                     var extends = node.Attributes["extends"];
                                     if (extends != null) {
                                         var name = extends.Value;
+                                        var exNumber = int.Parse(extension.Attributes["number"].Value);
+                                        var offset = int.Parse(node.Attributes["offset"].Value);
+                                        var sign = 1;
+                                        if (node.Attributes["dir"] != null) {
+                                            sign = -1;
+                                        }
+                                        EnumMap[name].Extend(node.Attributes["name"].Value, exNumber, offset, sign);
                                     }
                                 }
                             }

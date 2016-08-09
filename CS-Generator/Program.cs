@@ -26,8 +26,8 @@ namespace CS_Generator {
             }
             Generator g = new Generator(spec);
             g.WriteEnums(output, "CSGL.Vulkan");
-            g.WriteCommands(output, "CSGL.Vulkan.Unmanaged");
-            g.WriteStructs(output, "CSGL.Vulkan.Unmanaged");
+            //g.WriteCommands(output, "CSGL.Vulkan.Unmanaged");
+            //g.WriteStructs(output, "CSGL.Vulkan.Unmanaged");
             //g.WriteLoader(output, "CSGL.Vulkan.Unmanaged");
         }
     }
