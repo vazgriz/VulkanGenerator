@@ -42,7 +42,14 @@ namespace CS_Generator {
                 foreach (var e in spec.Enums) {
                     if (!spec.AllEnums.Contains(e.Name)) continue;
                     if (e.Bitmask) writer.WriteLine("    [Flags]");
-                    writer.WriteLine("    public enum {0} {{", GetName(e));
+                    writer.Write("    public enum {0}", GetName(e));
+
+                    if (e.Bitmask) {
+                        writer.WriteLine(" : uint {");
+                        writer.WriteLine("        None = 0,");
+                    } else {
+                        writer.WriteLine(" {");
+                    }
 
                     foreach (var v in e.Values) {
                         if (e.Bitmask) {
