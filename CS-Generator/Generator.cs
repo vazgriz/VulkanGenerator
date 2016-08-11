@@ -316,32 +316,7 @@ namespace CS_Generator {
             if (result.Contains("PFN_")) {
                 return "IntPtr";
             }
-            switch (result) {
-                case "size_t": return "long";
-                case "VkBool32": return "bool";
-                case "VkDeviceSize": return "ulong";
-                case "VkSampleMask": return "uint";
-                case "char": return "byte";
-
-                case "uint8_t": return "byte";
-                case "uint16_t": return "ushort";
-                case "uint32_t": return "uint";
-                case "uint64_t": return "ulong";
-
-                case "int8_t": return "sbyte";
-                case "int16_t": return "short";
-                case "int32_t": return "int";
-                case "int64_t": return "long";
-
-                case "char*": return "byte*";
-                case "char**": return "byte**";
-                case "uint32_t*": return "uint*";
-                case "VkSampleMask*": return "uint*";
-
-                case "HWND": return "IntPtr";
-                case "HINSTANCE": return "IntPtr";
-                default: return result;
-            }
+            return GetType(result);
         }
 
         string GetName(Field field) {
@@ -369,8 +344,8 @@ namespace CS_Generator {
 
         string GetType(string input) {
             switch (input) {
-                case "size_t": return "long";
-                case "VkBool32": return "uint";
+                case "size_t": return "ulong";
+                case "VkBool32": return "bool";
                 case "VkDeviceSize": return "ulong";
                 case "VkSampleMask": return "uint";
                 case "PFN_vkVoidFunction": return "IntPtr";
