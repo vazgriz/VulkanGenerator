@@ -19,6 +19,7 @@ namespace VulkanGenerator {
         public Dictionary<string, string> EnumValuesMap { get; private set; }
 
         public Dictionary<string, Enum> EnumMap { get; private set; }
+        public Dictionary<string, Struct> StructMap { get; private set; }
 
         public Spec(XmlDocument doc, int major, int minor, List<string> extensions) {
             this.major = major;
@@ -36,6 +37,7 @@ namespace VulkanGenerator {
             EnumValuesMap = new Dictionary<string, string>();
 
             EnumMap = new Dictionary<string, Enum>();
+            StructMap = new Dictionary<string, Struct>();
 
             Load(doc);
         }
@@ -79,13 +81,21 @@ namespace VulkanGenerator {
 
                         var s = new Struct(name, fields, union);
                         Structs.Add(s);
+                        StructMap.Add(name, s);
                     } else if (cat == "handle") {
                         string name = node["name"].InnerText;
                         List<Field> fields = new List<Field>();
-                        fields.Add(new Field("native", "IntPtr", false, null));
                         var s = new Struct(name, fields, false);
                         s.Handle = true;
+
+                        if (node["type"].InnerText == "VK_DEFINE_HANDLE") {
+                            fields.Add(new Field("native", "IntPtr", false, null));
+                        } else {
+                            fields.Add(new Field("native", "ulong", false, null));
+                        }
+
                         Structs.Add(s);
+                        StructMap.Add(name, s);
                     } else if (cat == "enum") {
                         var eName = node.Attributes["name"].Value;
                         if (!EnumMap.ContainsKey(eName)) {

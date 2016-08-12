@@ -1,0 +1,88 @@
+﻿using System;
+using System.Collections.Generic;
+
+using VulkanGenerator;
+
+namespace CS_Generator {
+    public class CSSpec {
+        public List<CSStruct> Structs { get; set; }
+        public List<CSEnum> Enums { get; set; }
+
+        Dictionary<string, CSEnum> EnumMap { get; set; }
+
+        public CSSpec(Spec spec, Patch patch) {
+            Structs = new List<CSStruct>();
+            Enums = new List<CSEnum>();
+            EnumMap = new Dictionary<string, CSEnum>();
+
+            foreach (var s in spec.Structs) {
+                if (spec.ExtensionTypes.Contains(s.Name) && !spec.IncludedTypes.Contains(s.Name)) continue;
+                Structs.Add(new CSStruct(s));
+            }
+
+            foreach (var e in spec.Enums) {
+                var cse = new CSEnum(e);
+                if (cse.Name.Contains("Flags")) cse.Values.Add(new CSEnumValue("None", "0"));
+                Enums.Add(cse);
+                EnumMap.Add(cse.Name, cse);
+            }
+
+            foreach (var s in Structs) {
+                foreach (var ps in patch.Structs) {
+                    if (ps.Name == s.Name) {
+                        ps.Apply(s);
+                    }
+                }
+            }
+
+            FixEnums();
+        }
+
+        public void FixEnums() {
+            for (int i = Enums.Count - 1; i >= 0; i--) {
+                var e = Enums[i];
+                if (!e.Name.Contains("FlagBits")) continue;
+                int index = e.Name.IndexOf("FlagBits");
+                string flagNames = e.Name.Substring(0, index);
+                flagNames += "Flags";
+                if (e.Name.Length > index + 8) flagNames += e.Name.Substring(index + 8, e.Name.Length - (index + 8));
+                var flags = EnumMap[flagNames];
+                foreach (var v in e.Values) {
+                    flags.Values.Add(v);
+                }
+                Enums.RemoveAt(i);
+            }
+        }
+
+        public static string GetType(string input) {
+            switch (input) {
+                case "size_t": return "ulong";
+                case "VkBool32": return "bool";
+                case "VkDeviceSize": return "ulong";
+                case "VkSampleMask": return "uint";
+                case "PFN_vkVoidFunction": return "IntPtr";
+
+                case "uint8_t": return "byte";
+                case "uint16_t": return "ushort";
+                case "uint32_t": return "uint";
+                case "uint64_t": return "ulong";
+                case "char": return "byte";
+
+                case "int8_t": return "sbyte";
+                case "int16_t": return "short";
+                case "int32_t": return "int";
+                case "int64_t": return "long";
+
+                case "char*": return "byte*";
+                case "char**": return "byte**";
+                case "uint32_t*": return "uint*";
+                case "VkSampleMask*": return "uint*";
+                case "VkBool32*": return "uint*";
+                case "VkDeviceSize*": return "ulong*";
+                case "size_t*": return "ulong*";
+                    
+                default: return input;
+            }
+        }
+    }
+}

@@ -13,21 +13,29 @@ namespace CS_Generator {
                 "VK_KHR_swapchain",
                 "VK_KHR_display",
                 "VK_KHR_display_swapchain",
-                "VK_KHR_win32_surface",
+                //"VK_KHR_win32_surface",
                 "VK_EXT_debug_report",
             };
-            string output = @"F:\Code\CSharpGameLibrary\CSharpGameLibrary\Vulkan";
+            //string output = @"F:\Code\CSharpGameLibrary\CSharpGameLibrary\Vulkan";
+            string output = "output";
             if (!Directory.Exists("output")) Directory.CreateDirectory("output");
             Spec spec;
+            Patch patch;
             using (var reader = File.Open("vk.xml", FileMode.Open)) {
                 XmlDocument doc = new XmlDocument();
                 doc.Load(reader);
                 spec = new Spec(doc, 1, 0, extensions);
             }
-            Generator g = new Generator(spec);
+            using (var reader = File.Open("patch.xml", FileMode.Open)) {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(reader);
+                patch = new Patch(doc);
+            }
+            CSSpec csSpec = new CSSpec(spec, patch);
+            Generator g = new Generator(csSpec);
             g.WriteEnums(output, "CSGL.Vulkan");
             //g.WriteCommands(output, "CSGL.Vulkan.Unmanaged");
-            //g.WriteStructs(output, "CSGL.Vulkan.Unmanaged");
+            g.WriteStructs(output, "CSGL.Vulkan");
             //g.WriteLoader(output, "CSGL.Vulkan.Unmanaged");
         }
     }
