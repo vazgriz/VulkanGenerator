@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CSCommand.cs" />
     <Compile Include="CSEnum.cs" />
     <Compile Include="CSSpec.cs" />
     <Compile Include="CSStruct.cs" />

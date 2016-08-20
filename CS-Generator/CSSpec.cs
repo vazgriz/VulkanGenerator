@@ -7,12 +7,14 @@ namespace CS_Generator {
     public class CSSpec {
         public List<CSStruct> Structs { get; set; }
         public List<CSEnum> Enums { get; set; }
+        public List<CSCommand> Commands { get; set; }
 
         Dictionary<string, CSEnum> EnumMap { get; set; }
 
         public CSSpec(Spec spec, Patch patch) {
             Structs = new List<CSStruct>();
             Enums = new List<CSEnum>();
+            Commands = new List<CSCommand>();
             EnumMap = new Dictionary<string, CSEnum>();
 
             foreach (var s in spec.Structs) {
@@ -25,6 +27,12 @@ namespace CS_Generator {
                 if (cse.Name.Contains("Flags")) cse.Values.Add(new CSEnumValue("None", "0"));
                 Enums.Add(cse);
                 EnumMap.Add(cse.Name, cse);
+            }
+
+            foreach (var c in spec.Commands) {
+                if (!spec.IncludedCommands.Contains(c.Name)) continue;
+                var csc = new CSCommand(c);
+                Commands.Add(csc);
             }
 
             foreach (var s in Structs) {
@@ -73,9 +81,18 @@ namespace CS_Generator {
                 case "int32_t": return "int";
                 case "int64_t": return "long";
 
-                case "char*": return "byte*";
-                case "char**": return "byte**";
+                case "uint8_t*": return "byte*";
+                case "uint16_t*": return "ushort*";
                 case "uint32_t*": return "uint*";
+                case "uint64_t*": return "ulong*";
+
+                case "int8_t*": return "sbyte*";
+                case "int16_t*": return "short*";
+                case "int32_t*": return "int*";
+                case "int64_t*": return "long*";
+
+                case "char*": return "byte[]";
+                case "char**": return "IntPtr";
                 case "VkSampleMask*": return "uint*";
                 case "VkBool32*": return "uint*";
                 case "VkDeviceSize*": return "ulong*";
@@ -83,6 +100,22 @@ namespace CS_Generator {
                     
                 default: return input;
             }
+        }
+
+        public static bool IsPrimitive(string input) {
+            if (input == "byte" ||
+                input == "ushort" ||
+                input == "uint" ||
+                input == "ulong" ||
+                input == "sbyte" ||
+                input == "short" ||
+                input == "int" ||
+                input == "long" ||
+                input == "float" ||
+                input == "double") {
+                return true;
+            }
+            return false;
         }
     }
 }

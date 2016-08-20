@@ -34,7 +34,7 @@ namespace CS_Generator {
             CSSpec csSpec = new CSSpec(spec, patch);
             Generator g = new Generator(csSpec);
             g.WriteEnums(output, "CSGL.Vulkan");
-            //g.WriteCommands(output, "CSGL.Vulkan.Unmanaged");
+            g.WriteCommands(output, "CSGL.Vulkan.Unmanaged");
             g.WriteStructs(output, "CSGL.Vulkan");
             //g.WriteLoader(output, "CSGL.Vulkan.Unmanaged");
         }

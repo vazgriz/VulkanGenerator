@@ -38,7 +38,7 @@ namespace CS_Generator {
         }
 
         public string GetType(string type) {
-            if (type == "void*") return "IntPtr";
+            if (type.Contains("*")) return "IntPtr";
             return CSSpec.GetType(type);
         }
 

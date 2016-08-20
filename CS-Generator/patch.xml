@@ -143,8 +143,5 @@
     </struct>
   </structs>
   <commands>
-    <params>
-      <preserve type="VkAllocationCallbacks*"/>
-    </params>
   </commands>
 </patch>
