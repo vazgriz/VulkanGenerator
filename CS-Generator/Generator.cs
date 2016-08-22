@@ -29,27 +29,72 @@ namespace CS_Generator {
                 writer.WriteLine("namespace {0} {{", _namespace);
 
                 foreach (var s in spec.Structs) {
-                    if (s.Union) {
+                    if (s.Handle) {
+                        WriteHandle(writer, s);
+                        continue;
+                    }
 
-                    } else {
-                        writer.Write("    public");
-                        if (s.Unsafe) writer.Write(" unsafe");
-                        writer.WriteLine(" struct {0} {{", s.Name);
+                    if (s.Union) writer.WriteLine("    [StructLayout(LayoutKind.Explicit)]//union");
+                    writer.Write("    public");
+                    if (s.Unsafe) writer.Write(" unsafe");
+                    writer.WriteLine(" struct {0} {{", s.Name);
 
-                        foreach (var f in s.Fields) {
-                            if (f.Attribute != null) {
-                                writer.WriteLine("        {0}", f.Attribute);
-                            }
-                            writer.WriteLine("        public {0} {1};", f.Type, f.Name);
+                    foreach (var f in s.Fields) {
+                        if (f.Attribute != null) {
+                            writer.WriteLine("        {0}", f.Attribute);
+                        }
+                        if (s.Union) writer.WriteLine("        [FieldOffset(0)]");
+                        string type = f.Type;
+                        if (spec.FlagsMap.ContainsKey(type)) {
+                            type = spec.FlagsMap[type];
                         }
 
-                        writer.WriteLine("    }");
-                        writer.WriteLine();
+                        writer.WriteLine("        public {0} {1};", type, f.Name);
                     }
+
+                    writer.WriteLine("    }");
+                    writer.WriteLine();
                 }
 
                 writer.WriteLine("}");
             }
+        }
+
+        public void WriteHandle(StreamWriter writer, CSStruct s) {
+            writer.WriteLine("    public struct {0} : IEquatable<{0}> {{", s.Name);
+            foreach (var f in s.Fields) {
+                writer.WriteLine("        public {0} {1};", f.Type, f.Name);
+            }
+
+            writer.WriteLine(
+@"
+        public static {0} Null {{ get; }} = new {0}();
+
+        public override bool Equals(object other) {{
+            if (other is {0}) {{
+                return Equals(({0})other);
+            }}
+            return false;
+        }}
+
+        public bool Equals({0} other) {{
+            return other.native == native;
+        }}
+
+        public static bool operator == ({0} a, {0} b) {{
+            return a.Equals(b);
+        }}
+
+        public static bool operator != ({0} a, {0} b) {{
+            return !(a == b);
+        }}
+
+        public override int GetHashCode() {{
+            return native.GetHashCode();
+        }}", s.Name);
+
+            writer.WriteLine("    }");
+            writer.WriteLine();
         }
 
         public void WriteEnums(string output, string _namespace) {
@@ -64,6 +109,11 @@ namespace CS_Generator {
                     if (e.Flags) {
                         writer.WriteLine("    [Flags]");
                     }
+                    string name = e.Name;
+                    if (spec.FlagsMap.ContainsKey(name)) {
+                        name = spec.FlagsMap[name];
+                    }
+
                     writer.Write("    public enum {0}", e.Name);
                     if (e.Flags) writer.Write(" : uint");
                     writer.WriteLine(" {");
@@ -101,9 +151,16 @@ namespace CS_Generator {
                     writer.Write("    public");
                     if (_unsafe) writer.Write(" unsafe");
                     writer.WriteLine(" delegate {0} {1}Delegate(", c.ReturnType, c.Name);
+
                     for (int i = 0; i < c.Params.Count; i++) {
                         var p = c.Params[i];
-                        writer.Write("        {0} {1}", p.Type, p.Name);
+
+                        string type = p.Type;
+                        if (spec.FlagsMap.ContainsKey(type)) {
+                            type = spec.FlagsMap[type];
+                        }
+
+                        writer.Write("        {0} {1}", type, p.Name);
                         if (i != c.Params.Count - 1) writer.Write(",");
                         writer.WriteLine();
                     }

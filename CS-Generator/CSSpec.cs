@@ -8,6 +8,7 @@ namespace CS_Generator {
         public List<CSStruct> Structs { get; set; }
         public List<CSEnum> Enums { get; set; }
         public List<CSCommand> Commands { get; set; }
+        public Dictionary<string, string> FlagsMap { get; set; }
 
         Dictionary<string, CSEnum> EnumMap { get; set; }
 
@@ -16,6 +17,7 @@ namespace CS_Generator {
             Enums = new List<CSEnum>();
             Commands = new List<CSCommand>();
             EnumMap = new Dictionary<string, CSEnum>();
+            FlagsMap = new Dictionary<string, string>();
 
             foreach (var s in spec.Structs) {
                 if (spec.ExtensionTypes.Contains(s.Name) && !spec.IncludedTypes.Contains(s.Name)) continue;
@@ -43,6 +45,14 @@ namespace CS_Generator {
                 }
             }
 
+            //foreach (var c in Commands) {
+            //    foreach (var pc in patch.Commands) {
+            //        if (pc.Name == c.Name) {
+            //            pc.Apply(c);
+            //        }
+            //    }
+            //}
+
             FixEnums();
         }
 
@@ -50,6 +60,7 @@ namespace CS_Generator {
             for (int i = Enums.Count - 1; i >= 0; i--) {
                 var e = Enums[i];
                 if (!e.Name.Contains("FlagBits")) continue;
+
                 int index = e.Name.IndexOf("FlagBits");
                 string flagNames = e.Name.Substring(0, index);
                 flagNames += "Flags";
@@ -59,6 +70,7 @@ namespace CS_Generator {
                     flags.Values.Add(v);
                 }
                 Enums.RemoveAt(i);
+                FlagsMap.Add(e.Name, flags.Name);
             }
         }
 

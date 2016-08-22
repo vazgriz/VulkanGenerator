@@ -9,9 +9,12 @@ namespace CS_Generator {
         public List<CSField> Fields { get; set; }
         public bool Unsafe { get; set; }
         public bool Union { get; set; }
+        public bool Handle { get; set; }
 
         public CSStruct(Struct s) {
             Name = s.Name;
+            Handle = s.Handle;
+            Union = s.Union;
 
             Fields = new List<CSField>();
 
@@ -38,8 +41,10 @@ namespace CS_Generator {
         }
 
         public string GetType(string type) {
+            type = CSSpec.GetType(type);
             if (type.Contains("*")) return "IntPtr";
-            return CSSpec.GetType(type);
+            if (type.Contains("PFN_")) return "IntPtr";
+            return type;
         }
 
         string GetName(string name) {

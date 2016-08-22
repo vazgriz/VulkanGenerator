@@ -23,17 +23,17 @@
       <field name="description" type="byte[]" marshal-type="ByValArray" marshal-size="256"/>
     </struct>
     <struct name="VkApplicationInfo">
-      <field name="pApplicationName" type="byte[]" marshal-type="LPArray"/>
-      <field name="pEngineName" type="byte[]" marshal-type="LPArray"/>
+      <field name="pApplicationName" type="string"/>
+      <field name="pEngineName" type="string"/>
       <field name="applicationVersion" type="VkVersion" />
       <field name="engineVersion" type="VkVersion" />
       <field name="apiVersion" type="VkVersion" />
     </struct>
     <struct name="VkDeviceQueueCreateInfo">
-      <field name="pQueuePriorities" type="float[]" marshal-type="LPArray"/>
+      <field name="pQueuePriorities" type="IntPtr"/>
     </struct>
     <struct name="VkDeviceCreateInfo">
-      <field name="pQueueCreateInfos" type="VkDeviceQueueCreateInfo[]" marshal-type="LPArray"/>
+      <field name="pQueueCreateInfos" type="IntPtr"/>
     </struct>
     <struct name="VkInstanceCreateInfo">
       <field name="pApplicationInfo" type="IntPtr"/>
@@ -43,105 +43,299 @@
       <field name="memoryHeaps" type="VkMemoryHeap" marshal-type="ByValArray" marshal-size="16"/>
     </struct>
     <struct name="VkBufferCreateInfo">
-      <field name="pQueueFamilyIndices" type="uint[]" marshal-type="LPArray"/>
+      <field name="pQueueFamilyIndices" type="uint[]"/>
     </struct>
     <struct name="VkImageCreateInfo">
-      <field name="pQueueFamilyIndices" type="uint[]" marshal-type="LPArray"/>
+      <field name="pQueueFamilyIndices" type="uint[]"/>
     </struct>
     <struct name="VkBindSparseInfo">
       <field name="pWaitSemaphores" type="VkSemaphore[]" marshal-type ="LPArray"/>
-      <field name="pBufferBinds" type="VkSparseBufferMemoryBindInfo[]" marshal-type="LPArray"/>
-      <field name="pImageOpaqueBinds" type="VkSparseImageOpaqueMemoryBindInfo[]" marshal-type="LPArray"/>
-      <field name="pImageBinds" type="VkSparseImageMemoryBindInfo[]" marshal-type="LPArray"/>
+      <field name="pBufferBinds" type="VkSparseBufferMemoryBindInfo[]"/>
+      <field name="pImageOpaqueBinds" type="VkSparseImageOpaqueMemoryBindInfo[]"/>
+      <field name="pImageBinds" type="VkSparseImageMemoryBindInfo[]"/>
       <field name="pSignalSemaphores" type="VkSemaphore" marshaltype="LPArray"/>
     </struct>
     <struct name="VkShaderModuleCreateInfo">
-      <field name="pCode" type="uint[]" marshal-type="LPArray"/>
+      <field name="pCode" type="IntPtr"/>
     </struct>
     <struct name="VkDescriptorSetLayoutBinding">
-      <field name="pImmutableSamplers" type="VkSampler[]" marshal-type="LPArray"/>
+      <field name="pImmutableSamplers" type="VkSampler[]"/>
     </struct>
     <struct name="VkDescriptorSetLayoutCreateInfo">
-      <field name="pBindings" type="VkDescriptorSetLayoutBinding[]" marshal-type="LPArray"/>
+      <field name="pBindings" type="VkDescriptorSetLayoutBinding[]"/>
     </struct>
     <struct name="VkDescriptorPoolCreateInfo">
-      <field name="pPoolSizes" type="VkDescriptorPoolSize[]" marshal-type="LPArray"/>
+      <field name="pPoolSizes" type="VkDescriptorPoolSize[]"/>
     </struct>
     <struct name="VkDescriptorSetAllocateInfo">
-      <field name="pSetLayouts" type="VkDescriptorSetLayout[]" marshal-type="LPArray"/>
+      <field name="pSetLayouts" type="VkDescriptorSetLayout[]"/>
     </struct>
     <struct name="VkPipelineShaderStageCreateInfo">
       <field name="pSpecializationInfo" type="IntPtr"/>
     </struct>
     <struct name="VkPipelineVertexInputStateCreateInfo">
-      <field name="pVertexBindingDescriptions" type="VkVertexInputBindingDescription[]" marshal-type="LPArray"/>
-      <field name="pVertexAttributeDescriptions" type="VkVertexInputAttributeDescription[]" marshal-type="LPArray"/>
+      <field name="pVertexBindingDescriptions" type="VkVertexInputBindingDescription[]"/>
+      <field name="pVertexAttributeDescriptions" type="VkVertexInputAttributeDescription[]"/>
     </struct>
     <struct name="VkPipelineViewportStateCreateInfo">
-      <field name="pViewports" type="VkViewport[]" marshal-type="LPArray"/>
-      <field name="pScissors" type="VkRect2D[]" marshal-type="LPArray"/>
+      <field name="pViewports" type="VkViewport[]"/>
+      <field name="pScissors" type="VkRect2D[]"/>
     </struct>
     <struct name="VkPipelineMultisampleStateCreateInfo">
-      <field name="pSampleMask" type="VkSampleMask[]" marshal-type="LPArray"/>
+      <field name="pSampleMask" type="uint[]"/>
     </struct>
     <struct name="VkPipelineColorBlendStateCreateInfo">
-      <field name="pAttachments" type="VkPipelineColorBlendAttachmentState" marshal-type="LPArray"/>
+      <field name="pAttachments" type="VkPipelineColorBlendAttachmentState[]"/>
       <field name="blendConstants" type="float[]" marshal-type="ByValArray" marshal-size="4"/>
     </struct>
     <struct name="VkPipelineDynamicStateCreateInfo">
-      <field name="pDynamicStates" type="VkDynamicState[]" marshal-type="LPArray"/>
+      <field name="pDynamicStates" type="VkDynamicState[]"/>
     </struct>
     <struct name="VkGraphicsPipelineCreateInfo">
-      <field name="pStages" type="VkPipelineShaderStageCreateInfo[]" marshal-type="LPArray"/>
+      <field name="pStages" type="VkPipelineShaderStageCreateInfo[]"/>
+    </struct>
+    <struct name="VkPipelineCacheCreateInfo">
+      <field name="pInitialData" type="byte[]"/>
     </struct>
     <struct name="VkPipelineLayoutCreateInfo">
-      <field name="pSetLayouts" type="VkDescriptorSetLayout" marshal-type="LPArray"/>
-      <field name="pPushConstantRanges" type="VkPushConstantRange[]" marshal-type="LPArray"/>
+      <field name="pSetLayouts" type="VkDescriptorSetLayout[]"/>
+      <field name="pPushConstantRanges" type="VkPushConstantRange[]"/>
     </struct>
     <struct name="VkRenderPassBeginInfo">
-      <field name="pClearValues" type="VkClearValue[]" marshal-type="LPArray"/>
+      <field name="pClearValues" type="VkClearValue[]"/>
     </struct>
     <struct name="VkSubpassDescription">
-      <field name="pInputAttachments" type="VkAttachmentReference[]" marshal-type="LPArray"/>
-      <field name="pColorAttachments" type="VkAttachmentReference[]" marshal-type="LPArray"/>
-      <field name="pResolveAttachments" type="VkAttachmentReference[]" marshal-type="LPArray"/>
-      <field name="pPreserveAttachments" type="uint[]" marshal-type="LPArray"/>
+      <field name="pInputAttachments" type="VkAttachmentReference[]"/>
+      <field name="pColorAttachments" type="VkAttachmentReference[]"/>
+      <field name="pResolveAttachments" type="VkAttachmentReference[]"/>
+      <field name="pPreserveAttachments" type="uint[]"/>
       <field name="pDepthStencilAttachment" type="IntPtr"/>
     </struct>
     <struct name="VkRenderPassCreateInfo">
-      <field name="pAttachments" type="VkAttachmentDescription[]" marshal-type="LPArray"/>
-      <field name="pSubpasses" type="VkSubpassDescription[]" marshal-type="LPArray"/>
-      <field name="pDependencies" type="VkSubpassDependency[]" marshal-type="LPArray"/>
+      <field name="pAttachments" type="VkAttachmentDescription[]"/>
+      <field name="pSubpasses" type="VkSubpassDescription[]"/>
+      <field name="pDependencies" type="VkSubpassDependency[]"/>
     </struct>
     <struct name="VkFramebufferCreateInfo">
-      <field name="pAttachments" type="VkImageView" marshal-type="LPArray"/>
+      <field name="pAttachments" type="VkImageView"/>
     </struct>
     <struct name="VkSubmitInfo">
-      <field name="pWaitSemaphores" type="VkSemaphore[]" marshal-type="LPArray"/>
-      <field name="pWaitDstStageMask" type="VkPipelineStageFlags[]" marshal-type="LPArray"/>
-      <field name="pCommandBuffers" type="VkCommandBuffer[]" marshal-type="LPArray"/>
-      <field name="pSignalSemaphores" type="VkSemaphore[]" marshal-type="LPArray"/>
+      <field name="pWaitSemaphores" type="VkSemaphore[]"/>
+      <field name="pWaitDstStageMask" type="VkPipelineStageFlags[]"/>
+      <field name="pCommandBuffers" type="VkCommandBuffer[]"/>
+      <field name="pSignalSemaphores" type="VkSemaphore[]"/>
     </struct>
     <struct name="VkDisplayPropertiesKHR">
-      <field name="displayName" type="byte[]" marshal-type="LPArray"/>
+      <field name="displayName" type="string"/>
     </struct>
     <struct name="VkSwapchainCreateInfoKHR">
-      <field name="pQueueFamilyIndices" type="uint[]" marshal-type="LPArray"/>
+      <field name="pQueueFamilyIndices" type="uint[]"/>
     </struct>
     <struct name="VkPresentInfoKHR">
-      <field name="pWaitSemaphores" type="VkSemaphore[]" marshal-type="LPArray"/>
-      <field name="pSwapchains" type="VkSwapchainKHR[]" marshal-type="LPArray"/>
-      <field name="pImageIndices" type="uint[]" marshal-type="LPArray"/>
-      <field name="pResults" type="VkResult[]" marshal-type="LPArray"/>
+      <field name="pWaitSemaphores" type="VkSemaphore[]"/>
+      <field name="pSwapchains" type="VkSwapchainKHR[]"/>
+      <field name="pImageIndices" type="uint[]"/>
+      <field name="pResults" type="VkResult[]"/>
     </struct>
     <struct name="VkDebugMarkerObjectNameInfoEXT">
-      <field name="pObjectName" type="byte[]" marshal-type="LPArray"/>
+      <field name="pObjectName" type="string"/>
     </struct>
     <struct name="VkDebugMarkerMarkerInfoEXT">
-      <field name="pMarkerName" type="byte[]" marshal-type="LPArray"/>
+      <field name="pMarkerName" type="string"/>
       <field name="color" type="float[]" marshal-type="ByValArray" marshal-size="4"/>
     </struct>
   </structs>
   <commands>
+    <command name="vkCreateInstance">
+      <param name="pCreateInfo" type="ref VkInstanceCreateInfo"/>
+      <param name="pInstance" type="out VkInstance"/>
+    </command>
+    <command name="vkGetPhysicalDeviceProperties">
+      <param name="pProperties" type="out VkPhysicalDeviceProperties"/>
+    </command>
+    <command name="vkGetPhysicalDeviceMemoryProperties">
+      <param name="pMemoryProperties" type="out VkPhysicalDeviceMemoryProperties"/>
+    </command>
+    <command name="vkGetPhysicalDeviceFeatures">
+      <param name="pFeatures" type="out VkPhysicalDeviceFeatures"/>
+    </command>
+    <command name="vkGetPhysicalDeviceFormatProperties">
+      <param name="pFormatProperties" type="out VkFormatProperties"/>
+    </command>
+    <command name="vkGetPhysicalDeviceImageFormatProperties">
+      <param name="pImageFormatProperties" type="out VkImageFormatProperties"/>
+    </command>
+    <command name="vkCreateDevice">
+      <param name="pCreateInfo" type="ref VkDeviceCreateInfo"/>
+      <param name="pDevice" type="out VkDevice"/>
+    </command>
+    <command name="vkGetDeviceQueue">
+      <param name="pQueue" type="out VkQueue"/>
+    </command>
+    <command name="vkAllocateMemory">
+      <param name="pMemory" type="out VkDeviceMemory"/>
+    </command>
+    <command name="vkMapMemory">
+      <param name="ppData" type="out IntPtr"/>
+    </command>
+    <command name="vkGetDeviceMemoryCommitment">
+      <param name="pCommittedMemoryInBytes" type="ref ulong"/>
+    </command>
+    <command name="vkGetBufferMemoryRequirements">
+      <param name="pMemoryRequirements" type="out VkMemoryRequirements"/>
+    </command>
+    <command name="vkGetImageMemoryRequirements">
+      <param name="pMemoryRequirements" type="out VkMemoryRequirements"/>
+    </command>
+    <command name="vkQueueBindSparse">
+      <param name="pBindInfo" type="ref VkBindSparseInfo"/>
+    </command>
+    <command name="vkCreateFence">
+      <param name="pCreateInfo" type="ref VkFenceCreateInfo"/>
+      <param name="pFence" type="out VkFence"/>
+    </command>
+    <command name="vkCreateSemaphore">
+      <param name="pCreateInfo" type="ref VkSemaphoreCreateInfo"/>
+      <param name="pSemaphore" type="out VkSemaphore"/>
+    </command>
+    <command name="vkCreateEvent">
+      <param name="pCreateInfo" type="ref VkEventCreateInfo"/>
+      <param name="pEvent" type="out VkEvent"/>
+    </command>
+    <command name="vkCreateQueryPool">
+      <param name="pCreateInfo" type="ref VkEventCreateInfo"/>
+      <param name="pQueryPool" type="out VkQueryPool"/>
+    </command>
+    <command name="vkCreateBuffer">
+      <param name="pCreateInfo" type="ref VkBufferCreateInfo"/>
+      <param name="pBuffer" type="out VkBuffer"/>
+    </command>
+    <command name="vkCreateBufferView">
+      <param name="pCreateInfo" type="ref VkBufferViewCreateInfo"/>
+      <param name="pView" type="out VkBufferView"/>
+    </command>
+    <command name="vkCreateImage">
+      <param name="pCreateInfo" type="ref VkImageCreateInfo"/>
+      <param name="pImage" type="out VkImage"/>
+    </command>
+    <command name="vkGetImageSubresourceLayout">
+      <param name="pSubresource" type="out VkImageSubresource"/>
+      <param name="pLayout" type="out VkSubresourceLayout"/>
+    </command>
+    <command name="vkCreateImageView">
+      <param name="pCreateInfo" type="ref VkImageViewCreateInfo"/>
+      <param name="pView" type="out VkImageView"/>
+    </command>
+    <command name="vkCreateShaderModule">
+      <param name="pCreateInfo" type="ref VkShaderModuleCreateInfo"/>
+      <param name="pShaderModule" type="out VkShaderModule"/>
+    </command>
+    <command name="vkCreatePipelineCache">
+      <param name="pCreateInfo" type="ref VkPipelineCacheCreateInfo"/>
+      <param name="pPipelineCache" type="out VkPipelineCache"/>
+    </command>
+    <command name="vkGetPipelineCacheData">
+      <param name="pDataSize" type="ref ulong"/>
+      <param name="pData" type="IntPtr"/>
+    </command>
+    <command name="vkCreateGraphicsPipelines">
+      <param name="pCreateInfo" type="ref VkGraphicsPipelineCreateInfo"/>
+    </command>
+    <command name="vkCreateComputePipelines">
+      <param name="pCreateInfo" type="ref VkComputePipelineCreateInfo"/>
+    </command>
+    <command name="vkCreatePipelineLayout">
+      <param name="pCreateInfo" type="ref VkPipelineLayoutCreateInfo"/>
+      <param name="pPipelineLayout" type="out VkPipelineLayout"/>
+    </command>
+    <command name="vkCreateSampler">
+      <param name="pCreateInfo" type="ref VkSamplerCreateInfo"/>
+      <param name="pSampler" type="out VkSampler"/>
+    </command>
+    <command name="vkCreateDescriptorSetLayout">
+      <param name="pCreateInfo" type="ref VkDescriptorSetLayoutCreateInfo"/>
+      <param name="pSetLayout" type="out VkDescriptorSetLayout"/>
+    </command>
+    <command name="vkCreateDescriptorPool">
+      <param name="pCreateInfo" type="ref VkDescriptorPoolCreateInfo"/>
+      <param name="pDescriptorPool" type="out VkDescriptorPool"/>
+    </command>
+    <command name="vkAllocateDescriptorSets">
+      <param name="pAllocateInfo" type="ref VkDescriptorSetAllocateInfo"/>
+    </command>
+    <command name="vkCreateFramebuffer">
+      <param name="pCreateInfo" type="ref VkFramebufferCreateInfo"/>
+      <param name="pFramebuffer" type="out VkFramebuffer"/>
+    </command>
+    <command name="vkCreateRenderPass">
+      <param name="pCreateInfo" type="ref VkRenderPassCreateInfo"/>
+      <param name="pRenderPass" type="out VkRenderPass"/>
+    </command>
+    <command name="vkGetRenderAreaGranularity">
+      <param name="pGranularity" type="out VkExtent2D"/>
+    </command>
+    <command name="vkCreateCommandPool">
+      <param name="pCreateInfo" type="ref VkCommandPoolCreateInfo"/>
+      <param name="pCommandPool" type="out VkCommandPool"/>
+    </command>
+    <command name="vkAllocateCommandBuffers">
+      <param name="pAllocateInfo" type="ref VkCommandBufferAllocateInfo"/>
+    </command>
+    <command name="vkBeginCommandBuffer">
+      <param name="pBeginInfo" type="ref VkCommandBufferBeginInfo"/>
+    </command>
+    <command name="vkCmdClearColorImage">
+      <param name="pColor" type="ref VkClearColorValue"/>
+    </command>
+    <command name="vkCmdClearDepthStencilImage">
+      <param name="pDepthStencil" type="ref VkClearDepthStencilValue"/>
+    </command>
+    <command name="vkCmdBeginRenderPass">
+      <param name="pRenderPassBegin" type="ref VkRenderPassBeginInfo"/>
+    </command>
+    <command name="vkCreateDisplayModeKHR">
+      <param name="pCreateInfo" type="ref VkDisplayModeCreateInfoKHR"/>
+      <param name="pMode" type="out VkDisplayModeKHR"/>
+    </command>
+    <command name="vkGetDisplayPlaneCapabilitiesKHR">
+      <param name="pCreateInfo" type="ref VkDisplayModeCreateInfoKHR"/>
+      <param name="pCapabilities" type="out VkDisplayPlaneCapabilitiesKHR"/>
+    </command>
+    <command name="vkCreateDisplayPlaneSurfaceKHR">
+      <param name="pCreateInfo" type="ref VkDisplaySurfaceCreateInfoKHR"/>
+      <param name="pSurface" type="out VkSurfaceKHR"/>
+    </command>
+    <command name="vkGetPhysicalDeviceSurfaceSupportKHR">
+      <param name="pSupported" type="out bool"/>
+    </command>
+    <command name="vkGetPhysicalDeviceSurfaceCapabilitiesKHR">
+      <param name="pSurfaceCapabilities" type="out VkSurfaceCapabilitiesKHR"/>
+    </command>
+    <command name="vkCreateSwapchainKHR">
+      <param name="pCreateInfo" type="ref VkSwapchainCreateInfoKHR"/>
+      <param name="pSwapchain" type="out VkSwapchainKHR"/>
+    </command>
+    <command name="vkGetPhysicalDeviceSurfaceCapabilitiesKHR">
+      <param name="pImageIndex" type="out uint"/>
+    </command>
+    <command name="vkQueuePresentKHR">
+      <param name="pPresentInfo" type="ref VkPresentInfoKHR"/>
+    </command>
+    <command name="vkCreateDebugReportCallbackEXT">
+      <param name="pCreateInfo" type="ref VkDebugReportCallbackCreateInfoEXT"/>
+      <param name="pCallback" type="out VkDebugReportCallbackEXT"/>
+    </command>
+    <command name="vkDebugMarkerSetObjectNameEXT">
+      <param name="pNameInfo" type="ref VkDebugMarkerObjectNameInfoEXT"/>
+    </command>
+    <command name="vkDebugMarkerSetObjectTagEXT">
+      <param name="pTagInfo" type="ref VkDebugMarkerObjectTagInfoEXT"/>
+    </command>
+    <command name="vkCmdDebugMarkerBeginEXT">
+      <param name="pMarkerInfo" type="ref VkDebugMarkerMarkerInfoEXT"/>
+    </command>
+    <command name="vkCmdDebugMarkerInsertEXT">
+      <param name="pMarkerInfo" type="ref VkDebugMarkerMarkerInfoEXT"/>
+    </command>
   </commands>
 </patch>

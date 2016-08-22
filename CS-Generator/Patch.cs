@@ -5,11 +5,11 @@ using System.Xml;
 namespace CS_Generator {
     public class Patch {
         public List<PatchStruct> Structs { get; set; }
-        public List<string> PreserveTypes { get; set; }
+        public List<PatchCommand> Commands { get; set; }
 
         public Patch(XmlDocument doc) {
             Structs = new List<PatchStruct>();
-            PreserveTypes = new List<string>();
+            Commands = new List<PatchCommand>();
 
             XmlNode root = doc.ChildNodes[1];
             XmlNode structs = root.ChildNodes[0];
@@ -22,16 +22,8 @@ namespace CS_Generator {
             XmlNode commands = root.ChildNodes[1];
 
             for (int i = 0; i < commands.ChildNodes.Count; i++) {
-                XmlNode node = commands.ChildNodes[i];
-                if (node.Name == "params") {
-                    foreach (XmlNode param in node.ChildNodes) {
-                        if (param.Name == "preserve") {
-                            PreserveTypes.Add(param.Attributes["type"].Value);
-                        }
-                    }
-                } else if (node.Name == "command") {
-
-                }
+                var c = new PatchCommand(commands.ChildNodes[i]);
+                Commands.Add(c);
             }
         }
     }

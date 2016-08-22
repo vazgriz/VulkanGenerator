@@ -16,8 +16,8 @@ namespace CS_Generator {
                 //"VK_KHR_win32_surface",
                 "VK_EXT_debug_report",
             };
-            //string output = @"F:\Code\CSharpGameLibrary\CSharpGameLibrary\Vulkan";
-            string output = "output";
+            string output = @"F:\Code\CSharpGameLibrary\CSharpGameLibrary\Vulkan";
+            //string output = "output";
             if (!Directory.Exists("output")) Directory.CreateDirectory("output");
             Spec spec;
             Patch patch;
