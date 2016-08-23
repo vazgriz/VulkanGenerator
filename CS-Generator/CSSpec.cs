@@ -103,7 +103,7 @@ namespace CS_Generator {
                 case "int32_t*": return "int*";
                 case "int64_t*": return "long*";
 
-                case "char*": return "byte[]";
+                case "char*": return "IntPtr";
                 case "char**": return "IntPtr";
                 case "VkSampleMask*": return "uint*";
                 case "VkBool32*": return "uint*";

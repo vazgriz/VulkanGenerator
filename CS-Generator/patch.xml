@@ -48,82 +48,20 @@
     <struct name="VkImageCreateInfo">
       <field name="pQueueFamilyIndices" type="uint[]"/>
     </struct>
-    <struct name="VkBindSparseInfo">
-      <field name="pWaitSemaphores" type="VkSemaphore[]" marshal-type ="LPArray"/>
-      <field name="pBufferBinds" type="VkSparseBufferMemoryBindInfo[]"/>
-      <field name="pImageOpaqueBinds" type="VkSparseImageOpaqueMemoryBindInfo[]"/>
-      <field name="pImageBinds" type="VkSparseImageMemoryBindInfo[]"/>
-      <field name="pSignalSemaphores" type="VkSemaphore" marshaltype="LPArray"/>
-    </struct>
     <struct name="VkShaderModuleCreateInfo">
       <field name="pCode" type="IntPtr"/>
-    </struct>
-    <struct name="VkDescriptorSetLayoutBinding">
-      <field name="pImmutableSamplers" type="VkSampler[]"/>
-    </struct>
-    <struct name="VkDescriptorSetLayoutCreateInfo">
-      <field name="pBindings" type="VkDescriptorSetLayoutBinding[]"/>
-    </struct>
-    <struct name="VkDescriptorPoolCreateInfo">
-      <field name="pPoolSizes" type="VkDescriptorPoolSize[]"/>
-    </struct>
-    <struct name="VkDescriptorSetAllocateInfo">
-      <field name="pSetLayouts" type="VkDescriptorSetLayout[]"/>
-    </struct>
-    <struct name="VkPipelineShaderStageCreateInfo">
-      <field name="pSpecializationInfo" type="IntPtr"/>
-    </struct>
-    <struct name="VkPipelineVertexInputStateCreateInfo">
-      <field name="pVertexBindingDescriptions" type="VkVertexInputBindingDescription[]"/>
-      <field name="pVertexAttributeDescriptions" type="VkVertexInputAttributeDescription[]"/>
-    </struct>
-    <struct name="VkPipelineViewportStateCreateInfo">
-      <field name="pViewports" type="VkViewport[]"/>
-      <field name="pScissors" type="VkRect2D[]"/>
     </struct>
     <struct name="VkPipelineMultisampleStateCreateInfo">
       <field name="pSampleMask" type="uint[]"/>
     </struct>
     <struct name="VkPipelineColorBlendStateCreateInfo">
-      <field name="pAttachments" type="VkPipelineColorBlendAttachmentState[]"/>
       <field name="blendConstants" type="float[]" marshal-type="ByValArray" marshal-size="4"/>
-    </struct>
-    <struct name="VkPipelineDynamicStateCreateInfo">
-      <field name="pDynamicStates" type="VkDynamicState[]"/>
-    </struct>
-    <struct name="VkGraphicsPipelineCreateInfo">
-      <field name="pStages" type="VkPipelineShaderStageCreateInfo[]"/>
     </struct>
     <struct name="VkPipelineCacheCreateInfo">
       <field name="pInitialData" type="byte[]"/>
     </struct>
-    <struct name="VkPipelineLayoutCreateInfo">
-      <field name="pSetLayouts" type="VkDescriptorSetLayout[]"/>
-      <field name="pPushConstantRanges" type="VkPushConstantRange[]"/>
-    </struct>
-    <struct name="VkRenderPassBeginInfo">
-      <field name="pClearValues" type="VkClearValue[]"/>
-    </struct>
     <struct name="VkSubpassDescription">
-      <field name="pInputAttachments" type="VkAttachmentReference[]"/>
-      <field name="pColorAttachments" type="VkAttachmentReference[]"/>
-      <field name="pResolveAttachments" type="VkAttachmentReference[]"/>
       <field name="pPreserveAttachments" type="uint[]"/>
-      <field name="pDepthStencilAttachment" type="IntPtr"/>
-    </struct>
-    <struct name="VkRenderPassCreateInfo">
-      <field name="pAttachments" type="VkAttachmentDescription[]"/>
-      <field name="pSubpasses" type="VkSubpassDescription[]"/>
-      <field name="pDependencies" type="VkSubpassDependency[]"/>
-    </struct>
-    <struct name="VkFramebufferCreateInfo">
-      <field name="pAttachments" type="VkImageView"/>
-    </struct>
-    <struct name="VkSubmitInfo">
-      <field name="pWaitSemaphores" type="VkSemaphore[]"/>
-      <field name="pWaitDstStageMask" type="VkPipelineStageFlags[]"/>
-      <field name="pCommandBuffers" type="VkCommandBuffer[]"/>
-      <field name="pSignalSemaphores" type="VkSemaphore[]"/>
     </struct>
     <struct name="VkDisplayPropertiesKHR">
       <field name="displayName" type="string"/>
@@ -132,16 +70,9 @@
       <field name="pQueueFamilyIndices" type="uint[]"/>
     </struct>
     <struct name="VkPresentInfoKHR">
-      <field name="pWaitSemaphores" type="VkSemaphore[]"/>
-      <field name="pSwapchains" type="VkSwapchainKHR[]"/>
       <field name="pImageIndices" type="uint[]"/>
-      <field name="pResults" type="VkResult[]"/>
-    </struct>
-    <struct name="VkDebugMarkerObjectNameInfoEXT">
-      <field name="pObjectName" type="string"/>
     </struct>
     <struct name="VkDebugMarkerMarkerInfoEXT">
-      <field name="pMarkerName" type="string"/>
       <field name="color" type="float[]" marshal-type="ByValArray" marshal-size="4"/>
     </struct>
   </structs>
