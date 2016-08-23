@@ -47,6 +47,7 @@ namespace CS_Generator {
         }
 
         string GetType(string input) {
+            if (input == "char*") return "byte[]";
             input = CSSpec.GetType(input);
             if (input.Contains("*")) {
                 string type = input.Substring(0, input.Length - 1);
