@@ -23,8 +23,6 @@
       <field name="description" type="byte[]" marshal-type="ByValArray" marshal-size="256"/>
     </struct>
     <struct name="VkApplicationInfo">
-      <field name="pApplicationName" type="string"/>
-      <field name="pEngineName" type="string"/>
       <field name="applicationVersion" type="VkVersion" />
       <field name="engineVersion" type="VkVersion" />
       <field name="apiVersion" type="VkVersion" />
