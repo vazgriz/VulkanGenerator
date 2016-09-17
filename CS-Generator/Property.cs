@@ -32,7 +32,7 @@ namespace CS_Generator {
         string GetName(Field field) {
             string input = field.Name;
             if (field.Type.Contains("*")) while (input[0] == 'p') input = input.Substring(1);
-            BackingName = input;
+            BackingName = char.ToLower(input[0]) + input.Substring(1);
             return char.ToUpper(input[0]) + input.Substring(1);
         }
     }

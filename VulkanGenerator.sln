@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VulkanGenerator", "VulkanGenerator\VulkanGenerator.csproj", "{18FC7232-7D96-4740-AD4E-FCE3BBC4051C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecReader", "VulkanGenerator\SpecReader.csproj", "{18FC7232-7D96-4740-AD4E-FCE3BBC4051C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS-Generator", "CS-Generator\CS-Generator.csproj", "{3F11F182-BF6B-4D31-ABD8-F1F3918700C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generator", "CS-Generator\Generator.csproj", "{3F11F182-BF6B-4D31-ABD8-F1F3918700C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

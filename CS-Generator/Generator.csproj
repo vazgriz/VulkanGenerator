@@ -47,7 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateInfo.cs" />
     <Compile Include="CSCommand.cs" />
     <Compile Include="CSEnum.cs" />
     <Compile Include="CSSpec.cs" />
@@ -74,9 +73,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VulkanGenerator\VulkanGenerator.csproj">
+    <ProjectReference Include="..\VulkanGenerator\SpecReader.csproj">
       <Project>{18fc7232-7d96-4740-ad4e-fce3bbc4051c}</Project>
-      <Name>VulkanGenerator</Name>
+      <Name>SpecReader</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

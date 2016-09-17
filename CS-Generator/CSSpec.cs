@@ -9,7 +9,6 @@ namespace CS_Generator {
         public List<CSEnum> Enums { get; set; }
         public List<CSCommand> Commands { get; set; }
         public Dictionary<string, string> FlagsMap { get; set; }
-        public List<CreateInfo> CreateInfos { get; set; }
 
         Dictionary<string, CSEnum> EnumMap { get; set; }
 
@@ -19,16 +18,11 @@ namespace CS_Generator {
             Commands = new List<CSCommand>();
             EnumMap = new Dictionary<string, CSEnum>();
             FlagsMap = new Dictionary<string, string>();
-            CreateInfos = new List<CreateInfo>();
 
             foreach (var s in spec.Structs) {
                 if (spec.ExtensionTypes.Contains(s.Name) && !spec.IncludedTypes.Contains(s.Name)) continue;
                 var css = new CSStruct(s);
                 Structs.Add(css);
-                if (s.Name.Contains("CreateInfo")) {
-                    var c = new CreateInfo(s);
-                    CreateInfos.Add(c);
-                }
             }
 
             foreach (var e in spec.Enums) {

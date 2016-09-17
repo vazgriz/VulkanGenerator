@@ -17,11 +17,9 @@ namespace CS_Generator {
                 "VK_EXT_debug_report",
             };
             string output = @"..\..\CSharpGameLibrary\CSharpGameLibrary\Vulkan";
-            string createInfosPath = @"..\..\CSharpGameLibrary\CSharpGameLibary\Vulkan\Managed\Infos";
             //string output = "output";
-            //string createInfosPath = "output/infos";
+
             if (!Directory.Exists(output)) Directory.CreateDirectory(output);
-            if (!Directory.Exists(createInfosPath)) Directory.CreateDirectory(createInfosPath);
             Spec spec;
             Patch patch;
             using (var reader = File.Open("vk.xml", FileMode.Open)) {
@@ -40,7 +38,6 @@ namespace CS_Generator {
             //g.WriteCommands(output, "CSGL.Vulkan.Unmanaged");
             //g.WriteStructs(output, "CSGL.Vulkan");
             //g.WriteLoader(output, "CSGL.Vulkan.Unmanaged");
-            g.WriteCreateInfos(createInfosPath, "CSGL.Vulkan.Managed");
         }
     }
 }
