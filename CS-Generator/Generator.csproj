@@ -7,7 +7,7 @@
     <ProjectGuid>{3F11F182-BF6B-4D31-ABD8-F1F3918700C6}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CS_Generator</RootNamespace>
+    <RootNamespace>Generator</RootNamespace>
     <AssemblyName>CS-Generator</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -47,11 +47,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CPP_Offsets.cs" />
     <Compile Include="CSCommand.cs" />
     <Compile Include="CSEnum.cs" />
     <Compile Include="CSSpec.cs" />
     <Compile Include="CSStruct.cs" />
+    <Compile Include="CS_Offsets.cs" />
     <Compile Include="Generator.cs" />
+    <Compile Include="Offsets.cs" />
     <Compile Include="Patch.cs" />
     <Compile Include="PatchCommand.cs" />
     <Compile Include="PatchStruct.cs" />
@@ -63,6 +66,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\x64\Debug\offsets.txt">
+      <Link>offsets.txt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="patch.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>

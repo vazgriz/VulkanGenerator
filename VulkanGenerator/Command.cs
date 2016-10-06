@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace VulkanGenerator {
+namespace SpecReader {
     public class Command {
         public string Name { get; set; }
         public string ReturnType { get; set; }

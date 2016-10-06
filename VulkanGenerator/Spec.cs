@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Xml;
 
-namespace VulkanGenerator {
+namespace SpecReader {
     public class Spec {
         int major;
         int minor;

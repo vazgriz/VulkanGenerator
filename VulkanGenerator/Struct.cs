@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace VulkanGenerator {
+namespace SpecReader {
     public class Struct {
         public string Name { get; set; }
         public List<Field> Fields { get; set; }

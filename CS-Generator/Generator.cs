@@ -3,15 +3,17 @@ using System.IO;
 using System.Text;
 using System.Collections.Generic;
 
-using VulkanGenerator;
+using SpecReader;
 
-namespace CS_Generator {
+namespace Generator {
     public class Generator {
         CSSpec spec;
         DateTime time;
+        Offsets offsets;
 
-        public Generator(CSSpec spec) {
+        public Generator(CSSpec spec, Offsets offsets) {
             this.spec = spec;
+            this.offsets = offsets;
             //Console.WriteLine("{0} enums, {1} included", spec.Enums.Count, spec.IncludedEnums.Count);
             //Console.WriteLine("{0} commands, {1} included", spec.Commands.Count, spec.IncludedCommands.Count);
             //Console.WriteLine("{0} structs, {1} included", spec.Structs.Count, spec.IncludedTypes.Count);
@@ -34,22 +36,38 @@ namespace CS_Generator {
                         continue;
                     }
 
-                    if (s.Union) writer.WriteLine("    [StructLayout(LayoutKind.Explicit)]//union");
+                    if (offsets.Contains(s.Name)) writer.WriteLine("    [StructLayout(LayoutKind.Explicit, Size = {0})]",
+                        offsets[s.Name].size);
                     writer.Write("    public");
                     if (s.Unsafe) writer.Write(" unsafe");
                     writer.WriteLine(" struct {0} {{", s.Name);
 
-                    foreach (var f in s.Fields) {
+                    for (int i = 0; i < s.Fields.Count; i++) {
+                        var f = s.Fields[i];
                         if (f.Attribute != null) {
                             writer.WriteLine("        {0}", f.Attribute);
                         }
-                        if (s.Union) writer.WriteLine("        [FieldOffset(0)]");
                         string type = f.Type;
                         if (spec.FlagsMap.ContainsKey(type)) {
                             type = spec.FlagsMap[type];
                         }
 
+                        int fieldSize = CSSpec.GetSize(type);
+
+                        if (offsets.Contains(type)) {
+                            fieldSize = offsets[type].size;
+                        }
+
+                        if (offsets.Contains(s.Name)) writer.WriteLine("        [FieldOffset({0})]", offsets[s.Name].offsets[i]);
                         writer.WriteLine("        public {0} {1};", type, f.Name);
+
+                        if (f.ArraySize > 0 && offsets.Contains(s.Name) && type != "byte") {
+                            Offset o = offsets[s.Name];
+                            for (int j = 1; j < f.ArraySize; j++) {    //starting from 1 because 0 is applied above
+                                writer.WriteLine("        [FieldOffset({0})]", offsets[s.Name].offsets[i] + (j * fieldSize));
+                                writer.WriteLine("        public {0} {1}{2};", type, f.Name, j);
+                            }
+                        }
                     }
 
                     writer.WriteLine("    }");

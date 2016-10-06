@@ -10,17 +10,17 @@
       <field name="pfnInternalFree" type="IntPtr" />
     </struct>
     <struct name="VkPhysicalDeviceProperties">
-      <field name="deviceName" type="byte[]" marshal-type="ByValArray" marshal-size="256"/>
-      <field name="pipelineCacheUUID" type="byte[]" marshal-type="ByValArray" marshal-size="16"/>
+      <field name="deviceName" type="byte" marshal-type="ByValArray" marshal-size="256"/>
+      <field name="pipelineCacheUUID" type="byte" marshal-type="ByValArray" marshal-size="16"/>
     </struct>
     <struct name="VkExtensionProperties">
-      <field name="extensionName" type="byte[]" marshal-type="ByValArray" marshal-size="256"/>
+      <field name="extensionName" type="byte" marshal-type="ByValArray" marshal-size="256"/>
       <field name="specVersion" type="VkVersion" />
     </struct>
     <struct name="VkLayerProperties">
-      <field name="layerName" type="byte[]" marshal-type="ByValArray" marshal-size="256"/>
+      <field name="layerName" type="byte" marshal-type="ByValArray" marshal-size="256"/>
       <field name="specVersion" type="VkVersion" />
-      <field name="description" type="byte[]" marshal-type="ByValArray" marshal-size="256"/>
+      <field name="description" type="byte" marshal-type="ByValArray" marshal-size="256"/>
     </struct>
     <struct name="VkApplicationInfo">
       <field name="applicationVersion" type="VkVersion" />
@@ -28,35 +28,20 @@
       <field name="apiVersion" type="VkVersion" />
     </struct>
     <struct name="VkPhysicalDeviceMemoryProperties">
-      <field name="memoryTypes" type="VkMemoryType" marshal-type="ByValArray" marshal-size="32"/>
-      <field name="memoryHeaps" type="VkMemoryHeap" marshal-type="ByValArray" marshal-size="16"/>
+      <field name="memoryTypes" type="VkMemoryType" marshal-type="ByValArray" marshal-size="32" marshal-verbose="true"/>
+      <field name="memoryHeaps" type="VkMemoryHeap" marshal-type="ByValArray" marshal-size="16" marshal-verbose="true"/>
     </struct>
     <struct name="VkPipelineColorBlendStateCreateInfo">
-      <field name="blendConstants" type="float[]" marshal-type="ByValArray" marshal-size="4"/>
+      <field name="blendConstants" type="float" marshal-type="ByValArray" marshal-size="4"/>
     </struct>
     <struct name="VkDebugMarkerMarkerInfoEXT">
-      <field name="color" type="float[]" marshal-type="ByValArray" marshal-size="4"/>
+      <field name="color" type="float" marshal-type="ByValArray" marshal-size="4"/>
     </struct>
   </structs>
   <commands>
     <command name="vkCreateInstance">
       <param name="pCreateInfo" type="ref VkInstanceCreateInfo"/>
       <param name="pInstance" type="out VkInstance"/>
-    </command>
-    <command name="vkGetPhysicalDeviceProperties">
-      <param name="pProperties" type="out VkPhysicalDeviceProperties"/>
-    </command>
-    <command name="vkGetPhysicalDeviceMemoryProperties">
-      <param name="pMemoryProperties" type="out VkPhysicalDeviceMemoryProperties"/>
-    </command>
-    <command name="vkGetPhysicalDeviceFeatures">
-      <param name="pFeatures" type="out VkPhysicalDeviceFeatures"/>
-    </command>
-    <command name="vkGetPhysicalDeviceFormatProperties">
-      <param name="pFormatProperties" type="out VkFormatProperties"/>
-    </command>
-    <command name="vkGetPhysicalDeviceImageFormatProperties">
-      <param name="pImageFormatProperties" type="out VkImageFormatProperties"/>
     </command>
     <command name="vkCreateDevice">
       <param name="pCreateInfo" type="ref VkDeviceCreateInfo"/>

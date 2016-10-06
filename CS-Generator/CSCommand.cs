@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using VulkanGenerator;
+using SpecReader;
 
-namespace CS_Generator {
+namespace Generator {
     public class CSCommand {
         public string Name { get; set; }
         public string ReturnType { get; set; }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Xml;
 
-namespace CS_Generator {
+namespace Generator {
     public class PatchCommand {
         public string Name { get; set; }
         public List<PatchParam> Params { get; set; }

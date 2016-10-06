@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Xml;
 
-namespace CS_Generator {
+namespace Generator {
     public class PatchStruct {
         public string Name { get; set; }
         public List<PatchField> Fields { get; set; }
@@ -34,22 +34,27 @@ namespace CS_Generator {
         public string Type { get; set; }
         public string MarshalType { get; set; }
         public string MarshalSize { get; set; }
+        public bool MarshalVerbose { get; set; }
 
         public PatchField(XmlNode node) {
             Name = node.Attributes["name"].Value;
             Type = node.Attributes["type"].Value;
             MarshalType = node.Attributes["marshal-type"]?.Value;
             MarshalSize = node.Attributes["marshal-size"]?.Value;
+            MarshalVerbose = node.Attributes["marshal-verbose"] != null;
         }
 
         public void Apply(CSField f) {
             f.Type = Type;
             if (MarshalType != null) {
-                var att = string.Format("[MarshalAs(UnmanagedType.{0}", MarshalType);
-                if (MarshalSize != null) att += string.Format(", SizeConst = {0}", MarshalSize);
-                att += ")]";
-                f.Attribute = att;
+                if (MarshalSize == null) {
+                    var att = string.Format("[MarshalAs(UnmanagedType.{0})]", MarshalType);
+                    f.Attribute = att;
+                } else {
+                    f.ArraySize = int.Parse(MarshalSize);
+                }
             }
+            f.Verbose = MarshalVerbose;
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Xml;
 
-namespace CS_Generator {
+namespace Generator {
     public class Patch {
         public List<PatchStruct> Structs { get; set; }
         public List<PatchCommand> Commands { get; set; }

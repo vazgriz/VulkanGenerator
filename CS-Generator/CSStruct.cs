@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using VulkanGenerator;
+using SpecReader;
 
-namespace CS_Generator {
+namespace Generator {
     public class CSStruct {
         public string Name { get; set; }
         public List<CSField> Fields { get; set; }
@@ -33,6 +33,8 @@ namespace CS_Generator {
         public bool Unsafe { get; set; }
         public int Pointer { get; set; }
         public bool Fixed { get; set; }
+        public int ArraySize { get; set; }
+        public bool Verbose { get; set; }
 
         public CSField(Field f) {
             Name = GetName(f.Name);

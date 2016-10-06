@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
-using VulkanGenerator;
+using SpecReader;
 
-namespace CS_Generator {
+namespace Generator {
     public class CSEnum {
         public string Name { get; set; }
         public List<CSEnumValue> Values { get; set; }
         public bool Flags { get; set; }
 
-        public CSEnum(VulkanGenerator.Enum e) {
+        public CSEnum(SpecReader.Enum e) {
             Name = e.Name;
             Flags = e.Bitmask;
             Values = new List<CSEnumValue>();

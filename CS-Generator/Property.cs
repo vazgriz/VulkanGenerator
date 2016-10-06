@@ -1,8 +1,8 @@
 ﻿using System;
 
-using VulkanGenerator;
+using SpecReader;
 
-namespace CS_Generator {
+namespace Generator {
     public class Property {
         public string Name { get; set; }
         public string Type { get; set; }

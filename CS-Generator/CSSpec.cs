@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using VulkanGenerator;
+using SpecReader;
 
-namespace CS_Generator {
+namespace Generator {
     public class CSSpec {
         public List<CSStruct> Structs { get; set; }
         public List<CSEnum> Enums { get; set; }
@@ -46,13 +46,13 @@ namespace CS_Generator {
                 }
             }
 
-            //foreach (var c in Commands) {
-            //    foreach (var pc in patch.Commands) {
-            //        if (pc.Name == c.Name) {
-            //            pc.Apply(c);
-            //        }
-            //    }
-            //}
+            foreach (var c in Commands) {
+                foreach (var pc in patch.Commands) {
+                    if (pc.Name == c.Name) {
+                        pc.Apply(c);
+                    }
+                }
+            }
 
             FixEnums();
         }
@@ -78,7 +78,7 @@ namespace CS_Generator {
         public static string GetType(string input) {
             switch (input) {
                 case "size_t": return "ulong";
-                case "VkBool32": return "bool";
+                case "VkBool32": return "uint";
                 case "VkDeviceSize": return "ulong";
                 case "VkSampleMask": return "uint";
                 case "PFN_vkVoidFunction": return "IntPtr";
@@ -129,6 +129,15 @@ namespace CS_Generator {
                 return true;
             }
             return false;
+        }
+
+        public static int GetSize(string input) {
+            switch (input) {
+                case "byte": return 1;
+                case "int": return 4;
+                case "float": return 4;
+                default: return 0;
+            }
         }
     }
 }
