@@ -17,6 +17,7 @@ namespace Generator {
                 "VK_EXT_debug_report",
             };
             string output = @"..\..\..\..\CSharpGameLibrary\CSharpGameLibrary\Vulkan";
+            string output2 = @"..\..\..\..\CSharpGameLibrary\CSharpGameLibrary\Vulkan\Unmanaged";
             //string output = "output";
 
             Offsets offsets;
@@ -44,7 +45,8 @@ namespace Generator {
             CSSpec csSpec = new CSSpec(spec, patch);
             Generator g = new Generator(csSpec, offsets);
             //g.WriteEnums(output, "CSGL.Vulkan");
-            g.WriteCommands(output, "CSGL.Vulkan.Unmanaged");
+            g.WriteDelegates(output2, "CSGL.Vulkan.Unmanaged");
+            g.WriteCommands(output2, "CSGL.Vulkan.Unmanaged");
             //g.WriteStructs(output, "CSGL.Vulkan");
             //g.WriteLoader(output, "CSGL.Vulkan.Unmanaged");
         }
