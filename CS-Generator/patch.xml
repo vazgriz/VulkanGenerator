@@ -37,6 +37,11 @@
     <struct name="VkDebugMarkerMarkerInfoEXT">
       <field name="color" type="float" marshal-type="ByValArray" marshal-size="4"/>
     </struct>
+    <struct name="VkClearColorValue">
+      <field name="int32" type="int" marshal-type="ByValArray" marshal-size="4"/>
+      <field name="uint32" type="uint" marshal-type="ByValArray" marshal-size="4"/>
+      <field name="float32" type="float" marshal-type="ByValArray" marshal-size="4"/>
+    </struct>
   </structs>
   <commands>
     <command name="vkCreateInstance">
@@ -51,6 +56,7 @@
       <param name="pQueue" type="out VkQueue"/>
     </command>
     <command name="vkAllocateMemory">
+      <param name="pAllocateInfo" type="ref VkMemoryAllocateInfo"/>
       <param name="pMemory" type="out VkDeviceMemory"/>
     </command>
     <command name="vkMapMemory">
@@ -116,12 +122,6 @@
       <param name="pDataSize" type="ref ulong"/>
       <param name="pData" type="IntPtr"/>
     </command>
-    <command name="vkCreateGraphicsPipelines">
-      <param name="pCreateInfo" type="ref VkGraphicsPipelineCreateInfo"/>
-    </command>
-    <command name="vkCreateComputePipelines">
-      <param name="pCreateInfo" type="ref VkComputePipelineCreateInfo"/>
-    </command>
     <command name="vkCreatePipelineLayout">
       <param name="pCreateInfo" type="ref VkPipelineLayoutCreateInfo"/>
       <param name="pPipelineLayout" type="out VkPipelineLayout"/>
@@ -177,7 +177,6 @@
     </command>
     <command name="vkGetDisplayPlaneCapabilitiesKHR">
       <param name="pCreateInfo" type="ref VkDisplayModeCreateInfoKHR"/>
-      <param name="pCapabilities" type="out VkDisplayPlaneCapabilitiesKHR"/>
     </command>
     <command name="vkCreateDisplayPlaneSurfaceKHR">
       <param name="pCreateInfo" type="ref VkDisplaySurfaceCreateInfoKHR"/>
@@ -187,13 +186,12 @@
       <param name="pSupported" type="out bool"/>
     </command>
     <command name="vkGetPhysicalDeviceSurfaceCapabilitiesKHR">
-      <param name="pSurfaceCapabilities" type="out VkSurfaceCapabilitiesKHR"/>
     </command>
     <command name="vkCreateSwapchainKHR">
       <param name="pCreateInfo" type="ref VkSwapchainCreateInfoKHR"/>
       <param name="pSwapchain" type="out VkSwapchainKHR"/>
     </command>
-    <command name="vkGetPhysicalDeviceSurfaceCapabilitiesKHR">
+    <command name="vkAcquireNextImageKHR">
       <param name="pImageIndex" type="out uint"/>
     </command>
     <command name="vkQueuePresentKHR">
@@ -214,6 +212,9 @@
     </command>
     <command name="vkCmdDebugMarkerInsertEXT">
       <param name="pMarkerInfo" type="ref VkDebugMarkerMarkerInfoEXT"/>
+    </command>
+    <command name="vkCmdBindDescriptorSets">
+      <param name="pDynamicOffsets" type="IntPtr"/>
     </command>
   </commands>
 </patch>
