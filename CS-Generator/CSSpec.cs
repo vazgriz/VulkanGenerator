@@ -27,7 +27,7 @@ namespace Generator {
 
             foreach (var e in spec.Enums) {
                 var cse = new CSEnum(e);
-                if (cse.Name.Contains("Flags")) cse.Values.Add(new CSEnumValue("None", "0"));
+                if (cse.Name.Contains("Flags")) cse.Values.Add(new CSEnumValue(cse.Name, "None", "0"));
                 Enums.Add(cse);
                 EnumMap.Add(cse.Name, cse);
             }
