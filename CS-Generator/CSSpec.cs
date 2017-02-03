@@ -136,7 +136,10 @@ namespace Generator {
                 case "byte": return 1;
                 case "int": return 4;
                 case "float": return 4;
-                default: return 0;
+                case "uint": return 4;
+                case "long": return 8;
+                case "ulong": return 8;
+                default: return -1;
             }
         }
     }
