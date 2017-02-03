@@ -21,6 +21,15 @@ namespace Generator {
             time = DateTime.Now;
         }
 
+        public void WriteFunctionNames(string output) {
+            string path = Path.Combine(output, "names.txt");
+            using (var writer = File.CreateText(path)) {
+                foreach (var c in spec.Commands) {
+                    writer.WriteLine(c.Name);
+                }
+            }
+        }
+
         public void WriteStructs(string output, string _namespace) {
             string path = Path.Combine(output, "structs.cs");
             using (var writer = File.CreateText(path)) {
