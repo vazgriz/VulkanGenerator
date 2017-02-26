@@ -1,0 +1,1198 @@
+VkOffset2D
+8
+    x: 0
+    y: 4
+
+VkOffset3D
+12
+    x: 0
+    y: 4
+    z: 8
+
+VkExtent2D
+8
+    width: 0
+    height: 4
+
+VkExtent3D
+12
+    width: 0
+    height: 4
+    depth: 8
+
+VkViewport
+24
+    x: 0
+    y: 4
+    width: 8
+    height: 12
+    minDepth: 16
+    maxDepth: 20
+
+VkRect2D
+16
+    offset: 0
+    extent: 8
+
+VkClearRect
+24
+    rect: 0
+    baseArrayLayer: 16
+    layerCount: 20
+
+VkComponentMapping
+16
+    r: 0
+    g: 4
+    b: 8
+    a: 12
+
+VkPhysicalDeviceProperties
+824
+    apiVersion: 0
+    driverVersion: 4
+    vendorID: 8
+    deviceID: 12
+    deviceType: 16
+    deviceName: 20
+    pipelineCacheUUID: 276
+    limits: 296
+    sparseProperties: 800
+
+VkExtensionProperties
+260
+    extensionName: 0
+    specVersion: 256
+
+VkLayerProperties
+520
+    layerName: 0
+    specVersion: 256
+    implementationVersion: 260
+    description: 264
+
+VkApplicationInfo
+48
+    sType: 0
+    pNext: 8
+    pApplicationName: 16
+    applicationVersion: 24
+    pEngineName: 32
+    engineVersion: 40
+    apiVersion: 44
+
+VkAllocationCallbacks
+48
+    pUserData: 0
+    pfnAllocation: 8
+    pfnReallocation: 16
+    pfnFree: 24
+    pfnInternalAllocation: 32
+    pfnInternalFree: 40
+
+VkDeviceQueueCreateInfo
+40
+    sType: 0
+    pNext: 8
+    flags: 16
+    queueFamilyIndex: 20
+    queueCount: 24
+    pQueuePriorities: 32
+
+VkDeviceCreateInfo
+72
+    sType: 0
+    pNext: 8
+    flags: 16
+    queueCreateInfoCount: 20
+    pQueueCreateInfos: 24
+    enabledLayerCount: 32
+    ppEnabledLayerNames: 40
+    enabledExtensionCount: 48
+    ppEnabledExtensionNames: 56
+    pEnabledFeatures: 64
+
+VkInstanceCreateInfo
+64
+    sType: 0
+    pNext: 8
+    flags: 16
+    pApplicationInfo: 24
+    enabledLayerCount: 32
+    ppEnabledLayerNames: 40
+    enabledExtensionCount: 48
+    ppEnabledExtensionNames: 56
+
+VkQueueFamilyProperties
+24
+    queueFlags: 0
+    queueCount: 4
+    timestampValidBits: 8
+    minImageTransferGranularity: 12
+
+VkPhysicalDeviceMemoryProperties
+520
+    memoryTypeCount: 0
+    memoryTypes: 4
+    memoryHeapCount: 260
+    memoryHeaps: 264
+
+VkMemoryAllocateInfo
+32
+    sType: 0
+    pNext: 8
+    allocationSize: 16
+    memoryTypeIndex: 24
+
+VkMemoryRequirements
+24
+    size: 0
+    alignment: 8
+    memoryTypeBits: 16
+
+VkSparseImageFormatProperties
+20
+    aspectMask: 0
+    imageGranularity: 4
+    flags: 16
+
+VkSparseImageMemoryRequirements
+48
+    formatProperties: 0
+    imageMipTailFirstLod: 20
+    imageMipTailSize: 24
+    imageMipTailOffset: 32
+    imageMipTailStride: 40
+
+VkMemoryType
+8
+    propertyFlags: 0
+    heapIndex: 4
+
+VkMemoryHeap
+16
+    size: 0
+    flags: 8
+
+VkMappedMemoryRange
+40
+    sType: 0
+    pNext: 8
+    memory: 16
+    offset: 24
+    size: 32
+
+VkFormatProperties
+12
+    linearTilingFeatures: 0
+    optimalTilingFeatures: 4
+    bufferFeatures: 8
+
+VkImageFormatProperties
+32
+    maxExtent: 0
+    maxMipLevels: 12
+    maxArrayLayers: 16
+    sampleCounts: 20
+    maxResourceSize: 24
+
+VkDescriptorBufferInfo
+24
+    buffer: 0
+    offset: 8
+    range: 16
+
+VkDescriptorImageInfo
+24
+    sampler: 0
+    imageView: 8
+    imageLayout: 16
+
+VkWriteDescriptorSet
+64
+    sType: 0
+    pNext: 8
+    dstSet: 16
+    dstBinding: 24
+    dstArrayElement: 28
+    descriptorCount: 32
+    descriptorType: 36
+    pImageInfo: 40
+    pBufferInfo: 48
+    pTexelBufferView: 56
+
+VkCopyDescriptorSet
+56
+    sType: 0
+    pNext: 8
+    srcSet: 16
+    srcBinding: 24
+    srcArrayElement: 28
+    dstSet: 32
+    dstBinding: 40
+    dstArrayElement: 44
+    descriptorCount: 48
+
+VkBufferCreateInfo
+56
+    sType: 0
+    pNext: 8
+    flags: 16
+    size: 24
+    usage: 32
+    sharingMode: 36
+    queueFamilyIndexCount: 40
+    pQueueFamilyIndices: 48
+
+VkBufferViewCreateInfo
+56
+    sType: 0
+    pNext: 8
+    flags: 16
+    buffer: 24
+    format: 32
+    offset: 40
+    range: 48
+
+VkImageSubresource
+12
+    aspectMask: 0
+    mipLevel: 4
+    arrayLayer: 8
+
+VkImageSubresourceLayers
+16
+    aspectMask: 0
+    mipLevel: 4
+    baseArrayLayer: 8
+    layerCount: 12
+
+VkImageSubresourceRange
+20
+    aspectMask: 0
+    baseMipLevel: 4
+    levelCount: 8
+    baseArrayLayer: 12
+    layerCount: 16
+
+VkMemoryBarrier
+24
+    sType: 0
+    pNext: 8
+    srcAccessMask: 16
+    dstAccessMask: 20
+
+VkBufferMemoryBarrier
+56
+    sType: 0
+    pNext: 8
+    srcAccessMask: 16
+    dstAccessMask: 20
+    srcQueueFamilyIndex: 24
+    dstQueueFamilyIndex: 28
+    buffer: 32
+    offset: 40
+    size: 48
+
+VkImageMemoryBarrier
+72
+    sType: 0
+    pNext: 8
+    srcAccessMask: 16
+    dstAccessMask: 20
+    oldLayout: 24
+    newLayout: 28
+    srcQueueFamilyIndex: 32
+    dstQueueFamilyIndex: 36
+    image: 40
+    subresourceRange: 48
+
+VkImageCreateInfo
+88
+    sType: 0
+    pNext: 8
+    flags: 16
+    imageType: 20
+    format: 24
+    extent: 28
+    mipLevels: 40
+    arrayLayers: 44
+    samples: 48
+    tiling: 52
+    usage: 56
+    sharingMode: 60
+    queueFamilyIndexCount: 64
+    pQueueFamilyIndices: 72
+    initialLayout: 80
+
+VkSubresourceLayout
+40
+    offset: 0
+    size: 8
+    rowPitch: 16
+    arrayPitch: 24
+    depthPitch: 32
+
+VkImageViewCreateInfo
+80
+    sType: 0
+    pNext: 8
+    flags: 16
+    image: 24
+    viewType: 32
+    format: 36
+    components: 40
+    subresourceRange: 56
+
+VkBufferCopy
+24
+    srcOffset: 0
+    dstOffset: 8
+    size: 16
+
+VkSparseMemoryBind
+40
+    resourceOffset: 0
+    size: 8
+    memory: 16
+    memoryOffset: 24
+    flags: 32
+
+VkSparseImageMemoryBind
+64
+    subresource: 0
+    offset: 12
+    extent: 24
+    memory: 40
+    memoryOffset: 48
+    flags: 56
+
+VkSparseBufferMemoryBindInfo
+24
+    buffer: 0
+    bindCount: 8
+    pBinds: 16
+
+VkSparseImageOpaqueMemoryBindInfo
+24
+    image: 0
+    bindCount: 8
+    pBinds: 16
+
+VkSparseImageMemoryBindInfo
+24
+    image: 0
+    bindCount: 8
+    pBinds: 16
+
+VkBindSparseInfo
+96
+    sType: 0
+    pNext: 8
+    waitSemaphoreCount: 16
+    pWaitSemaphores: 24
+    bufferBindCount: 32
+    pBufferBinds: 40
+    imageOpaqueBindCount: 48
+    pImageOpaqueBinds: 56
+    imageBindCount: 64
+    pImageBinds: 72
+    signalSemaphoreCount: 80
+    pSignalSemaphores: 88
+
+VkImageCopy
+68
+    srcSubresource: 0
+    srcOffset: 16
+    dstSubresource: 28
+    dstOffset: 44
+    extent: 56
+
+VkImageBlit
+80
+    srcSubresource: 0
+    srcOffsets: 16
+    dstSubresource: 40
+    dstOffsets: 56
+
+VkBufferImageCopy
+56
+    bufferOffset: 0
+    bufferRowLength: 8
+    bufferImageHeight: 12
+    imageSubresource: 16
+    imageOffset: 32
+    imageExtent: 44
+
+VkImageResolve
+68
+    srcSubresource: 0
+    srcOffset: 16
+    dstSubresource: 28
+    dstOffset: 44
+    extent: 56
+
+VkShaderModuleCreateInfo
+40
+    sType: 0
+    pNext: 8
+    flags: 16
+    codeSize: 24
+    pCode: 32
+
+VkDescriptorSetLayoutBinding
+24
+    binding: 0
+    descriptorType: 4
+    descriptorCount: 8
+    stageFlags: 12
+    pImmutableSamplers: 16
+
+VkDescriptorSetLayoutCreateInfo
+32
+    sType: 0
+    pNext: 8
+    flags: 16
+    bindingCount: 20
+    pBindings: 24
+
+VkDescriptorPoolSize
+8
+    type: 0
+    descriptorCount: 4
+
+VkDescriptorPoolCreateInfo
+40
+    sType: 0
+    pNext: 8
+    flags: 16
+    maxSets: 20
+    poolSizeCount: 24
+    pPoolSizes: 32
+
+VkDescriptorSetAllocateInfo
+40
+    sType: 0
+    pNext: 8
+    descriptorPool: 16
+    descriptorSetCount: 24
+    pSetLayouts: 32
+
+VkSpecializationMapEntry
+16
+    constantID: 0
+    offset: 4
+    size: 8
+
+VkSpecializationInfo
+32
+    mapEntryCount: 0
+    pMapEntries: 8
+    dataSize: 16
+    pData: 24
+
+VkPipelineShaderStageCreateInfo
+48
+    sType: 0
+    pNext: 8
+    flags: 16
+    stage: 20
+    module: 24
+    pName: 32
+    pSpecializationInfo: 40
+
+VkComputePipelineCreateInfo
+96
+    sType: 0
+    pNext: 8
+    flags: 16
+    stage: 24
+    layout: 72
+    basePipelineHandle: 80
+    basePipelineIndex: 88
+
+VkVertexInputBindingDescription
+12
+    binding: 0
+    stride: 4
+    inputRate: 8
+
+VkVertexInputAttributeDescription
+16
+    location: 0
+    binding: 4
+    format: 8
+    offset: 12
+
+VkPipelineVertexInputStateCreateInfo
+48
+    sType: 0
+    pNext: 8
+    flags: 16
+    vertexBindingDescriptionCount: 20
+    pVertexBindingDescriptions: 24
+    vertexAttributeDescriptionCount: 32
+    pVertexAttributeDescriptions: 40
+
+VkPipelineInputAssemblyStateCreateInfo
+32
+    sType: 0
+    pNext: 8
+    flags: 16
+    topology: 20
+    primitiveRestartEnable: 24
+
+VkPipelineTessellationStateCreateInfo
+24
+    sType: 0
+    pNext: 8
+    flags: 16
+    patchControlPoints: 20
+
+VkPipelineViewportStateCreateInfo
+48
+    sType: 0
+    pNext: 8
+    flags: 16
+    viewportCount: 20
+    pViewports: 24
+    scissorCount: 32
+    pScissors: 40
+
+VkPipelineRasterizationStateCreateInfo
+64
+    sType: 0
+    pNext: 8
+    flags: 16
+    depthClampEnable: 20
+    rasterizerDiscardEnable: 24
+    polygonMode: 28
+    cullMode: 32
+    frontFace: 36
+    depthBiasEnable: 40
+    depthBiasConstantFactor: 44
+    depthBiasClamp: 48
+    depthBiasSlopeFactor: 52
+    lineWidth: 56
+
+VkPipelineMultisampleStateCreateInfo
+48
+    sType: 0
+    pNext: 8
+    flags: 16
+    rasterizationSamples: 20
+    sampleShadingEnable: 24
+    minSampleShading: 28
+    pSampleMask: 32
+    alphaToCoverageEnable: 40
+    alphaToOneEnable: 44
+
+VkPipelineColorBlendAttachmentState
+32
+    blendEnable: 0
+    srcColorBlendFactor: 4
+    dstColorBlendFactor: 8
+    colorBlendOp: 12
+    srcAlphaBlendFactor: 16
+    dstAlphaBlendFactor: 20
+    alphaBlendOp: 24
+    colorWriteMask: 28
+
+VkPipelineColorBlendStateCreateInfo
+56
+    sType: 0
+    pNext: 8
+    flags: 16
+    logicOpEnable: 20
+    logicOp: 24
+    attachmentCount: 28
+    pAttachments: 32
+    blendConstants: 40
+
+VkPipelineDynamicStateCreateInfo
+32
+    sType: 0
+    pNext: 8
+    flags: 16
+    dynamicStateCount: 20
+    pDynamicStates: 24
+
+VkStencilOpState
+28
+    failOp: 0
+    passOp: 4
+    depthFailOp: 8
+    compareOp: 12
+    compareMask: 16
+    writeMask: 20
+    reference: 24
+
+VkPipelineDepthStencilStateCreateInfo
+104
+    sType: 0
+    pNext: 8
+    flags: 16
+    depthTestEnable: 20
+    depthWriteEnable: 24
+    depthCompareOp: 28
+    depthBoundsTestEnable: 32
+    stencilTestEnable: 36
+    front: 40
+    back: 68
+    minDepthBounds: 96
+    maxDepthBounds: 100
+
+VkGraphicsPipelineCreateInfo
+144
+    sType: 0
+    pNext: 8
+    flags: 16
+    stageCount: 20
+    pStages: 24
+    pVertexInputState: 32
+    pInputAssemblyState: 40
+    pTessellationState: 48
+    pViewportState: 56
+    pRasterizationState: 64
+    pMultisampleState: 72
+    pDepthStencilState: 80
+    pColorBlendState: 88
+    pDynamicState: 96
+    layout: 104
+    renderPass: 112
+    subpass: 120
+    basePipelineHandle: 128
+    basePipelineIndex: 136
+
+VkPipelineCacheCreateInfo
+40
+    sType: 0
+    pNext: 8
+    flags: 16
+    initialDataSize: 24
+    pInitialData: 32
+
+VkPushConstantRange
+12
+    stageFlags: 0
+    offset: 4
+    size: 8
+
+VkPipelineLayoutCreateInfo
+48
+    sType: 0
+    pNext: 8
+    flags: 16
+    setLayoutCount: 20
+    pSetLayouts: 24
+    pushConstantRangeCount: 32
+    pPushConstantRanges: 40
+
+VkSamplerCreateInfo
+80
+    sType: 0
+    pNext: 8
+    flags: 16
+    magFilter: 20
+    minFilter: 24
+    mipmapMode: 28
+    addressModeU: 32
+    addressModeV: 36
+    addressModeW: 40
+    mipLodBias: 44
+    anisotropyEnable: 48
+    maxAnisotropy: 52
+    compareEnable: 56
+    compareOp: 60
+    minLod: 64
+    maxLod: 68
+    borderColor: 72
+    unnormalizedCoordinates: 76
+
+VkCommandPoolCreateInfo
+24
+    sType: 0
+    pNext: 8
+    flags: 16
+    queueFamilyIndex: 20
+
+VkCommandBufferAllocateInfo
+32
+    sType: 0
+    pNext: 8
+    commandPool: 16
+    level: 24
+    commandBufferCount: 28
+
+VkCommandBufferInheritanceInfo
+56
+    sType: 0
+    pNext: 8
+    renderPass: 16
+    subpass: 24
+    framebuffer: 32
+    occlusionQueryEnable: 40
+    queryFlags: 44
+    pipelineStatistics: 48
+
+VkCommandBufferBeginInfo
+32
+    sType: 0
+    pNext: 8
+    flags: 16
+    pInheritanceInfo: 24
+
+VkRenderPassBeginInfo
+64
+    sType: 0
+    pNext: 8
+    renderPass: 16
+    framebuffer: 24
+    renderArea: 32
+    clearValueCount: 48
+    pClearValues: 56
+
+VkClearColorValue
+16
+    float32: 0
+    int32: 0
+    uint32: 0
+
+VkClearDepthStencilValue
+8
+    depth: 0
+    stencil: 4
+
+VkClearValue
+16
+    color: 0
+    depthStencil: 0
+
+VkClearAttachment
+24
+    aspectMask: 0
+    colorAttachment: 4
+    clearValue: 8
+
+VkAttachmentDescription
+36
+    flags: 0
+    format: 4
+    samples: 8
+    loadOp: 12
+    storeOp: 16
+    stencilLoadOp: 20
+    stencilStoreOp: 24
+    initialLayout: 28
+    finalLayout: 32
+
+VkAttachmentReference
+8
+    attachment: 0
+    layout: 4
+
+VkSubpassDescription
+72
+    flags: 0
+    pipelineBindPoint: 4
+    inputAttachmentCount: 8
+    pInputAttachments: 16
+    colorAttachmentCount: 24
+    pColorAttachments: 32
+    pResolveAttachments: 40
+    pDepthStencilAttachment: 48
+    preserveAttachmentCount: 56
+    pPreserveAttachments: 64
+
+VkSubpassDependency
+28
+    srcSubpass: 0
+    dstSubpass: 4
+    srcStageMask: 8
+    dstStageMask: 12
+    srcAccessMask: 16
+    dstAccessMask: 20
+    dependencyFlags: 24
+
+VkRenderPassCreateInfo
+64
+    sType: 0
+    pNext: 8
+    flags: 16
+    attachmentCount: 20
+    pAttachments: 24
+    subpassCount: 32
+    pSubpasses: 40
+    dependencyCount: 48
+    pDependencies: 56
+
+VkEventCreateInfo
+24
+    sType: 0
+    pNext: 8
+    flags: 16
+
+VkFenceCreateInfo
+24
+    sType: 0
+    pNext: 8
+    flags: 16
+
+VkPhysicalDeviceFeatures
+220
+    robustBufferAccess: 0
+    fullDrawIndexUint32: 4
+    imageCubeArray: 8
+    independentBlend: 12
+    geometryShader: 16
+    tessellationShader: 20
+    sampleRateShading: 24
+    dualSrcBlend: 28
+    logicOp: 32
+    multiDrawIndirect: 36
+    drawIndirectFirstInstance: 40
+    depthClamp: 44
+    depthBiasClamp: 48
+    fillModeNonSolid: 52
+    depthBounds: 56
+    wideLines: 60
+    largePoints: 64
+    alphaToOne: 68
+    multiViewport: 72
+    samplerAnisotropy: 76
+    textureCompressionETC2: 80
+    textureCompressionASTC_LDR: 84
+    textureCompressionBC: 88
+    occlusionQueryPrecise: 92
+    pipelineStatisticsQuery: 96
+    vertexPipelineStoresAndAtomics: 100
+    fragmentStoresAndAtomics: 104
+    shaderTessellationAndGeometryPointSize: 108
+    shaderImageGatherExtended: 112
+    shaderStorageImageExtendedFormats: 116
+    shaderStorageImageMultisample: 120
+    shaderStorageImageReadWithoutFormat: 124
+    shaderStorageImageWriteWithoutFormat: 128
+    shaderUniformBufferArrayDynamicIndexing: 132
+    shaderSampledImageArrayDynamicIndexing: 136
+    shaderStorageBufferArrayDynamicIndexing: 140
+    shaderStorageImageArrayDynamicIndexing: 144
+    shaderClipDistance: 148
+    shaderCullDistance: 152
+    shaderFloat64: 156
+    shaderInt64: 160
+    shaderInt16: 164
+    shaderResourceResidency: 168
+    shaderResourceMinLod: 172
+    sparseBinding: 176
+    sparseResidencyBuffer: 180
+    sparseResidencyImage2D: 184
+    sparseResidencyImage3D: 188
+    sparseResidency2Samples: 192
+    sparseResidency4Samples: 196
+    sparseResidency8Samples: 200
+    sparseResidency16Samples: 204
+    sparseResidencyAliased: 208
+    variableMultisampleRate: 212
+    inheritedQueries: 216
+
+VkPhysicalDeviceSparseProperties
+20
+    residencyStandard2DBlockShape: 0
+    residencyStandard2DMultisampleBlockShape: 4
+    residencyStandard3DBlockShape: 8
+    residencyAlignedMipSize: 12
+    residencyNonResidentStrict: 16
+
+VkPhysicalDeviceLimits
+504
+    maxImageDimension1D: 0
+    maxImageDimension2D: 4
+    maxImageDimension3D: 8
+    maxImageDimensionCube: 12
+    maxImageArrayLayers: 16
+    maxTexelBufferElements: 20
+    maxUniformBufferRange: 24
+    maxStorageBufferRange: 28
+    maxPushConstantsSize: 32
+    maxMemoryAllocationCount: 36
+    maxSamplerAllocationCount: 40
+    bufferImageGranularity: 48
+    sparseAddressSpaceSize: 56
+    maxBoundDescriptorSets: 64
+    maxPerStageDescriptorSamplers: 68
+    maxPerStageDescriptorUniformBuffers: 72
+    maxPerStageDescriptorStorageBuffers: 76
+    maxPerStageDescriptorSampledImages: 80
+    maxPerStageDescriptorStorageImages: 84
+    maxPerStageDescriptorInputAttachments: 88
+    maxPerStageResources: 92
+    maxDescriptorSetSamplers: 96
+    maxDescriptorSetUniformBuffers: 100
+    maxDescriptorSetUniformBuffersDynamic: 104
+    maxDescriptorSetStorageBuffers: 108
+    maxDescriptorSetStorageBuffersDynamic: 112
+    maxDescriptorSetSampledImages: 116
+    maxDescriptorSetStorageImages: 120
+    maxDescriptorSetInputAttachments: 124
+    maxVertexInputAttributes: 128
+    maxVertexInputBindings: 132
+    maxVertexInputAttributeOffset: 136
+    maxVertexInputBindingStride: 140
+    maxVertexOutputComponents: 144
+    maxTessellationGenerationLevel: 148
+    maxTessellationPatchSize: 152
+    maxTessellationControlPerVertexInputComponents: 156
+    maxTessellationControlPerVertexOutputComponents: 160
+    maxTessellationControlPerPatchOutputComponents: 164
+    maxTessellationControlTotalOutputComponents: 168
+    maxTessellationEvaluationInputComponents: 172
+    maxTessellationEvaluationOutputComponents: 176
+    maxGeometryShaderInvocations: 180
+    maxGeometryInputComponents: 184
+    maxGeometryOutputComponents: 188
+    maxGeometryOutputVertices: 192
+    maxGeometryTotalOutputComponents: 196
+    maxFragmentInputComponents: 200
+    maxFragmentOutputAttachments: 204
+    maxFragmentDualSrcAttachments: 208
+    maxFragmentCombinedOutputResources: 212
+    maxComputeSharedMemorySize: 216
+    maxComputeWorkGroupCount: 220
+    maxComputeWorkGroupInvocations: 232
+    maxComputeWorkGroupSize: 236
+    subPixelPrecisionBits: 248
+    subTexelPrecisionBits: 252
+    mipmapPrecisionBits: 256
+    maxDrawIndexedIndexValue: 260
+    maxDrawIndirectCount: 264
+    maxSamplerLodBias: 268
+    maxSamplerAnisotropy: 272
+    maxViewports: 276
+    maxViewportDimensions: 280
+    viewportBoundsRange: 288
+    viewportSubPixelBits: 296
+    minMemoryMapAlignment: 304
+    minTexelBufferOffsetAlignment: 312
+    minUniformBufferOffsetAlignment: 320
+    minStorageBufferOffsetAlignment: 328
+    minTexelOffset: 336
+    maxTexelOffset: 340
+    minTexelGatherOffset: 344
+    maxTexelGatherOffset: 348
+    minInterpolationOffset: 352
+    maxInterpolationOffset: 356
+    subPixelInterpolationOffsetBits: 360
+    maxFramebufferWidth: 364
+    maxFramebufferHeight: 368
+    maxFramebufferLayers: 372
+    framebufferColorSampleCounts: 376
+    framebufferDepthSampleCounts: 380
+    framebufferStencilSampleCounts: 384
+    framebufferNoAttachmentsSampleCounts: 388
+    maxColorAttachments: 392
+    sampledImageColorSampleCounts: 396
+    sampledImageIntegerSampleCounts: 400
+    sampledImageDepthSampleCounts: 404
+    sampledImageStencilSampleCounts: 408
+    storageImageSampleCounts: 412
+    maxSampleMaskWords: 416
+    timestampComputeAndGraphics: 420
+    timestampPeriod: 424
+    maxClipDistances: 428
+    maxCullDistances: 432
+    maxCombinedClipAndCullDistances: 436
+    discreteQueuePriorities: 440
+    pointSizeRange: 444
+    lineWidthRange: 452
+    pointSizeGranularity: 460
+    lineWidthGranularity: 464
+    strictLines: 468
+    standardSampleLocations: 472
+    optimalBufferCopyOffsetAlignment: 480
+    optimalBufferCopyRowPitchAlignment: 488
+    nonCoherentAtomSize: 496
+
+VkSemaphoreCreateInfo
+24
+    sType: 0
+    pNext: 8
+    flags: 16
+
+VkQueryPoolCreateInfo
+32
+    sType: 0
+    pNext: 8
+    flags: 16
+    queryType: 20
+    queryCount: 24
+    pipelineStatistics: 28
+
+VkFramebufferCreateInfo
+64
+    sType: 0
+    pNext: 8
+    flags: 16
+    renderPass: 24
+    attachmentCount: 32
+    pAttachments: 40
+    width: 48
+    height: 52
+    layers: 56
+
+VkDrawIndirectCommand
+16
+    vertexCount: 0
+    instanceCount: 4
+    firstVertex: 8
+    firstInstance: 12
+
+VkDrawIndexedIndirectCommand
+20
+    indexCount: 0
+    instanceCount: 4
+    firstIndex: 8
+    vertexOffset: 12
+    firstInstance: 16
+
+VkDispatchIndirectCommand
+12
+    x: 0
+    y: 4
+    z: 8
+
+VkSubmitInfo
+72
+    sType: 0
+    pNext: 8
+    waitSemaphoreCount: 16
+    pWaitSemaphores: 24
+    pWaitDstStageMask: 32
+    commandBufferCount: 40
+    pCommandBuffers: 48
+    signalSemaphoreCount: 56
+    pSignalSemaphores: 64
+
+VkDisplayPropertiesKHR
+48
+    display: 0
+    displayName: 8
+    physicalDimensions: 16
+    physicalResolution: 24
+    supportedTransforms: 32
+    planeReorderPossible: 36
+    persistentContent: 40
+
+VkDisplayPlanePropertiesKHR
+16
+    currentDisplay: 0
+    currentStackIndex: 8
+
+VkDisplayModeParametersKHR
+12
+    visibleRegion: 0
+    refreshRate: 8
+
+VkDisplayModePropertiesKHR
+24
+    displayMode: 0
+    parameters: 8
+
+VkDisplayModeCreateInfoKHR
+32
+    sType: 0
+    pNext: 8
+    flags: 16
+    parameters: 20
+
+VkDisplayPlaneCapabilitiesKHR
+68
+    supportedAlpha: 0
+    minSrcPosition: 4
+    maxSrcPosition: 12
+    minSrcExtent: 20
+    maxSrcExtent: 28
+    minDstPosition: 36
+    maxDstPosition: 44
+    minDstExtent: 52
+    maxDstExtent: 60
+
+VkDisplaySurfaceCreateInfoKHR
+64
+    sType: 0
+    pNext: 8
+    flags: 16
+    displayMode: 24
+    planeIndex: 32
+    planeStackIndex: 36
+    transform: 40
+    globalAlpha: 44
+    alphaMode: 48
+    imageExtent: 52
+
+VkDisplayPresentInfoKHR
+56
+    sType: 0
+    pNext: 8
+    srcRect: 16
+    dstRect: 32
+    persistent: 48
+
+VkSurfaceCapabilitiesKHR
+52
+    minImageCount: 0
+    maxImageCount: 4
+    currentExtent: 8
+    minImageExtent: 16
+    maxImageExtent: 24
+    maxImageArrayLayers: 32
+    supportedTransforms: 36
+    currentTransform: 40
+    supportedCompositeAlpha: 44
+    supportedUsageFlags: 48
+
+VkSurfaceFormatKHR
+8
+    format: 0
+    colorSpace: 4
+
+VkSwapchainCreateInfoKHR
+104
+    sType: 0
+    pNext: 8
+    flags: 16
+    surface: 24
+    minImageCount: 32
+    imageFormat: 36
+    imageColorSpace: 40
+    imageExtent: 44
+    imageArrayLayers: 52
+    imageUsage: 56
+    imageSharingMode: 60
+    queueFamilyIndexCount: 64
+    pQueueFamilyIndices: 72
+    preTransform: 80
+    compositeAlpha: 84
+    presentMode: 88
+    clipped: 92
+    oldSwapchain: 96
+
+VkPresentInfoKHR
+64
+    sType: 0
+    pNext: 8
+    waitSemaphoreCount: 16
+    pWaitSemaphores: 24
+    swapchainCount: 32
+    pSwapchains: 40
+    pImageIndices: 48
+    pResults: 56
+
+VkDebugReportCallbackCreateInfoEXT
+40
+    sType: 0
+    pNext: 8
+    flags: 16
+    pfnCallback: 24
+    pUserData: 32
+
