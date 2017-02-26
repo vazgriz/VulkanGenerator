@@ -103,7 +103,7 @@
       <param name="pImage" type="out VkImage"/>
     </command>
     <command name="vkGetImageSubresourceLayout">
-      <param name="pSubresource" type="out VkImageSubresource"/>
+      <param name="pSubresource" type="ref VkImageSubresource"/>
       <param name="pLayout" type="out VkSubresourceLayout"/>
     </command>
     <command name="vkCreateImageView">
