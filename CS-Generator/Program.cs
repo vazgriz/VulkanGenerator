@@ -11,8 +11,8 @@ namespace Generator {
             List<string> extensions = new List<string>{
                 "VK_KHR_surface",
                 "VK_KHR_swapchain",
-                "VK_KHR_display",
-                "VK_KHR_display_swapchain",
+                //"VK_KHR_display",
+                //"VK_KHR_display_swapchain",
                 //"VK_KHR_win32_surface",
                 "VK_EXT_debug_report",
             };
