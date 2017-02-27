@@ -216,5 +216,8 @@
     <command name="vkCmdBindDescriptorSets">
       <param name="pDynamicOffsets" type="IntPtr"/>
     </command>
+    <command name="vkCmdSetBlendConstants">
+      <param name="blendConstants" type="IntPtr"/>
+    </command>
   </commands>
 </patch>
