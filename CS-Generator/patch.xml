@@ -87,7 +87,7 @@
       <param name="pEvent" type="out VkEvent"/>
     </command>
     <command name="vkCreateQueryPool">
-      <param name="pCreateInfo" type="ref VkEventCreateInfo"/>
+      <param name="pCreateInfo" type="ref VkQueryPoolCreateInfo"/>
       <param name="pQueryPool" type="out VkQueryPool"/>
     </command>
     <command name="vkCreateBuffer">
