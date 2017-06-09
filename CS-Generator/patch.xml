@@ -71,9 +71,6 @@
     <command name="vkGetImageMemoryRequirements">
       <param name="pMemoryRequirements" type="out VkMemoryRequirements"/>
     </command>
-    <command name="vkQueueBindSparse">
-      <param name="pBindInfo" type="ref VkBindSparseInfo"/>
-    </command>
     <command name="vkCreateFence">
       <param name="pCreateInfo" type="ref VkFenceCreateInfo"/>
       <param name="pFence" type="out VkFence"/>
