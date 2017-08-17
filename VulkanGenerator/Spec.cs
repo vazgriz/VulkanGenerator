@@ -270,7 +270,7 @@ namespace SpecReader {
                                         }
                                         EnumMap[name].Extend(node.Attributes["name"].Value, exNumber, offset, sign);
                                     }
-                                    IncludedEnums.Add(node.Attributes["name"].Value);
+                                    IncludedTypes.Add(node.Attributes["name"].Value);
                                 }
                             }
                         }
