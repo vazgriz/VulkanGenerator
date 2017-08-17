@@ -75,6 +75,7 @@ namespace SpecReader {
 
                         foreach (XmlNode fNode in node.ChildNodes) {
                             if (fNode is XmlComment) continue;
+                            if (fNode.Name == "comment") continue;
                             if (fNode.Name == "validity") continue;
                             LoadField(fNode, fields);
                         }
