@@ -231,9 +231,7 @@ namespace SpecReader {
             foreach (XmlNode node in root.ChildNodes) {
                 if (node.Name == "require") {
                     foreach (XmlNode f in node.ChildNodes) {
-                        if (f.Name == "enum") {
-                            IncludedEnums.Add(f.Attributes["name"].Value);
-                        } else if (f.Name == "command") {
+                        if (f.Name == "command") {
                             IncludedCommands.Add(f.Attributes["name"].Value);
                         }
                     }
@@ -272,6 +270,7 @@ namespace SpecReader {
                                         }
                                         EnumMap[name].Extend(node.Attributes["name"].Value, exNumber, offset, sign);
                                     }
+                                    IncludedEnums.Add(node.Attributes["name"].Value);
                                 }
                             }
                         }
