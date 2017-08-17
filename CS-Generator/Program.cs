@@ -44,10 +44,10 @@ namespace Generator {
             }
             CSSpec csSpec = new CSSpec(spec, patch);
             Generator g = new Generator(csSpec, offsets);
-            //g.WriteEnums(output, "CSGL.Vulkan");
-            g.WriteDelegates(output, "CSGL.Vulkan.Unmanaged");
-            g.WriteCommands(output, "CSGL.Vulkan.Unmanaged");
-            //g.WriteStructs(output, "CSGL.Vulkan");
+            g.WriteEnums(output, "CSGL.Vulkan1");
+            g.WriteDelegates(output, "CSGL.Vulkan1.Unmanaged");
+            g.WriteCommands(output, "CSGL.Vulkan1.Unmanaged");
+            g.WriteStructs(output, "CSGL.Vulkan1");
             //g.WriteLoader(output, "CSGL.Vulkan.Unmanaged");
             //g.WriteFunctionNames(output);
         }
