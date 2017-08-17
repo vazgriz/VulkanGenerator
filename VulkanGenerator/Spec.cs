@@ -12,7 +12,6 @@ namespace SpecReader {
         public HashSet<string> AllEnums { get; private set; }
         public List<Command> Commands { get; private set; }
         public List<Struct> Structs { get; private set; }
-        public HashSet<string> IncludedEnums { get; private set; }
         public HashSet<string> IncludedCommands { get; private set; }
         public HashSet<string> IncludedTypes { get; private set; }
         public HashSet<string> ExtensionTypes { get; private set; }
@@ -30,7 +29,6 @@ namespace SpecReader {
             AllEnums = new HashSet<string>();
             Commands = new List<Command>();
             Structs = new List<Struct>();
-            IncludedEnums = new HashSet<string>();
             IncludedCommands = new HashSet<string>();
             IncludedTypes = new HashSet<string>();
             ExtensionTypes = new HashSet<string>();
