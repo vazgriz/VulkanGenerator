@@ -78,7 +78,7 @@ namespace Generator {
 
         public static string GetType(string input) {
             switch (input) {
-                case "size_t": return "ulong";
+                case "size_t": return "IntPtr";
                 case "VkBool32": return "uint";
                 case "VkDeviceSize": return "ulong";
                 case "VkSampleMask": return "uint";
@@ -110,7 +110,7 @@ namespace Generator {
                 case "VkSampleMask*": return "uint*";
                 case "VkBool32*": return "uint*";
                 case "VkDeviceSize*": return "ulong*";
-                case "size_t*": return "ulong*";
+                case "size_t*": return "IntPtr*";
                     
                 default: return input;
             }
