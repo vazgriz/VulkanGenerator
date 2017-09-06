@@ -34,7 +34,6 @@ namespace Generator {
         public int Pointer { get; set; }
         public bool Fixed { get; set; }
         public int ArraySize { get; set; }
-        public bool Verbose { get; set; }
 
         public CSField(Field f) {
             Name = GetName(f.Name);

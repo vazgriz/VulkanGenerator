@@ -34,14 +34,12 @@ namespace Generator {
         public string Type { get; set; }
         public string MarshalType { get; set; }
         public string MarshalSize { get; set; }
-        public bool MarshalVerbose { get; set; }
 
         public PatchField(XmlNode node) {
             Name = node.Attributes["name"].Value;
             Type = node.Attributes["type"].Value;
             MarshalType = node.Attributes["marshal-type"]?.Value;
             MarshalSize = node.Attributes["marshal-size"]?.Value;
-            MarshalVerbose = node.Attributes["marshal-verbose"] != null;
         }
 
         public void Apply(CSField f) {
@@ -54,7 +52,6 @@ namespace Generator {
                     f.ArraySize = int.Parse(MarshalSize);
                 }
             }
-            f.Verbose = MarshalVerbose;
         }
     }
 }
