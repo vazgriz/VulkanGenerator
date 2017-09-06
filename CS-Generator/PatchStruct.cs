@@ -32,25 +32,18 @@ namespace Generator {
     public class PatchField {
         public string Name { get; set; }
         public string Type { get; set; }
-        public string MarshalType { get; set; }
-        public string MarshalSize { get; set; }
+        public string ArraySize { get; set; }
 
         public PatchField(XmlNode node) {
             Name = node.Attributes["name"].Value;
             Type = node.Attributes["type"].Value;
-            MarshalType = node.Attributes["marshal-type"]?.Value;
-            MarshalSize = node.Attributes["marshal-size"]?.Value;
+            ArraySize = node.Attributes["array-size"]?.Value;
         }
 
         public void Apply(CSField f) {
             f.Type = Type;
-            if (MarshalType != null) {
-                if (MarshalSize == null) {
-                    var att = string.Format("[MarshalAs(UnmanagedType.{0})]", MarshalType);
-                    f.Attribute = att;
-                } else {
-                    f.ArraySize = int.Parse(MarshalSize);
-                }
+            if (ArraySize != null) {
+                f.ArraySize = int.Parse(ArraySize);
             }
         }
     }
