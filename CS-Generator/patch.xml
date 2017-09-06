@@ -13,6 +13,14 @@
       <field name="deviceName" type="byte" array-size="256"/>
       <field name="pipelineCacheUUID" type="byte" array-size="16"/>
     </struct>
+    <struct name="VkPhysicalDeviceLimits">
+      <field name="maxComputeWorkGroupCount" type="uint" array-size="3" />
+      <field name="maxComputeWorkGroupSize" type="uint" array-size="3" />
+      <field name="maxViewportDimensions" type="uint" array-size="2" />
+      <field name="viewportBoundsRange" type="float" array-size="2" />
+      <field name="pointSizeRange" type="float" array-size="2" />
+      <field name="lineWidthRange" type="float" array-size="2" />
+    </struct>
     <struct name="VkExtensionProperties">
       <field name="extensionName" type="byte" array-size="256"/>
       <field name="specVersion" type="VkVersion" />
@@ -41,6 +49,10 @@
       <field name="int32" type="int" array-size="4"/>
       <field name="uint32" type="uint" array-size="4"/>
       <field name="float32" type="float" array-size="4"/>
+    </struct>
+    <struct name="VkImageBlit">
+      <field name="srcOffsets" type="VkOffset3D" array-size="2" />
+      <field name="dstOffsets" type="VkOffset3D" array-size="2" />
     </struct>
   </structs>
   <commands>
