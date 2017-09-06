@@ -53,9 +53,6 @@ namespace Generator {
 
                     for (int i = 0; i < s.Fields.Count; i++) {
                         var f = s.Fields[i];
-                        if (f.Attribute != null) {
-                            writer.WriteLine("        {0}", f.Attribute);
-                        }
                         string type = f.Type;
                         if (spec.FlagsMap.ContainsKey(type)) {
                             type = spec.FlagsMap[type];

@@ -29,7 +29,6 @@ namespace Generator {
     public class CSField {
         public string Name { get; set; }
         public string Type { get; set; }
-        public string Attribute { get; set; }
         public bool Unsafe { get; set; }
         public int Pointer { get; set; }
         public bool Fixed { get; set; }
