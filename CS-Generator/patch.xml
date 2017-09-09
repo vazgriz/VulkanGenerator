@@ -228,5 +228,9 @@
     <command name="vkCmdSetBlendConstants">
       <param name="blendConstants" type="IntPtr"/>
     </command>
+    <command name="vkDebugReportMessageEXT">
+      <param name="pLayerPrefix" type="IntPtr" />
+      <param name="pMessage" type="IntPtr" />
+    </command>
   </commands>
 </patch>
