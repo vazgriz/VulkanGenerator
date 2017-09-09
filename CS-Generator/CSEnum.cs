@@ -42,6 +42,7 @@ namespace Generator {
             string[] tokens = name.Split('_');
             StringBuilder builder = new StringBuilder();
 
+            bool underscoreLast = false;
             int emitted = 0;
 
             for (int i = 0; i < tokens.Length; i++) {
@@ -51,35 +52,46 @@ namespace Generator {
                     enumNames.Remove(token);
                     continue;
                 }
-                if (char.IsDigit(token[0]) && emitted == 0) builder.Append('_');
-                EmitValue(builder, token, i == (tokens.Length - 1));
+                EmitValue(builder, token, emitted == 0, i, tokens.Length, ref underscoreLast);
                 emitted++;
             }
 
             return builder.ToString();
         }
 
-        void EmitValue(StringBuilder builder, string token, bool last) {
+        void EmitValue(StringBuilder builder, string token, bool first, int index, int count, ref bool underscoreLast) {
             //capitalize first letter and lowercase every other letter
             //except if token contains numbers
             
             bool hasNumbers = false;
+            bool hasLetters = false;
 
             for (int i = 0; i < token.Length; i++) {
-                if (!hasNumbers && char.IsDigit(token[i])) {
+                if (char.IsDigit(token[i])) {
                     hasNumbers = true;
-                    break;
+                }
+                if (char.IsLetter(token[i])) {
+                    hasLetters = true;
+                }
+            }
+
+            //prepend underscore only if last emit did not append underscore and token has numbers
+            if (!underscoreLast && hasNumbers) {
+                if (!hasLetters || (hasLetters && !first)) {    //if no letters or if (letters and not first token emitted)
+                    builder.Append("_");
                 }
             }
 
             if (hasNumbers) {
                 builder.Append(token);
-                if (!last) builder.Append("_");
+                if (index != count - 1) builder.Append("_");
+                underscoreLast = true;
             } else {
                 builder.Append(char.ToUpper(token[0]));
                 for (int i = 1; i < token.Length; i++) {    //every other letter
                     builder.Append(char.ToLower(token[i]));
                 }
+                underscoreLast = false;
             }
         }
 
