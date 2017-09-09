@@ -77,7 +77,8 @@ namespace Generator {
 
             //prepend underscore only if last emit did not append underscore and token has numbers
             if (!underscoreLast && hasNumbers) {
-                if (!hasLetters || (hasLetters && !first)) {    //if no letters or if (letters and not first token emitted)
+                //no letters or (letters but not first token) or (first char is digit and first token)
+                if (!hasLetters || (hasLetters && !first) || (char.IsDigit(token[0]) && first)) {
                     builder.Append("_");
                 }
             }
