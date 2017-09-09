@@ -38,25 +38,49 @@ namespace Generator {
         }
 
         public string GetName(string enumName, string name) {
-            HashSet<string> enumNames = Split(enumName);
+            HashSet<string> enumNames = Split(enumName);    //get name of enum (eg VkStructureType)
             string[] tokens = name.Split('_');
             StringBuilder builder = new StringBuilder();
+
+            int emitted = 0;
 
             for (int i = 0; i < tokens.Length; i++) {
                 var token = tokens[i];
                 if (token == "VK") continue;
-                if (enumNames.Contains(token)) {
+                if (enumNames.Contains(token)) {    //strip name of enum from enum value (eg STRUCTURE_TYPE_INSTANCE_CREATE_INFO -> INSTANCE_CREATE_INFO)
                     enumNames.Remove(token);
                     continue;
                 }
-                if (char.IsDigit(token[0])) builder.Append('_');
-                builder.Append(token[0]);   //capitalize first letter
-                for (int j = 1; j < token.Length; j++) {
-                    builder.Append(char.ToLower(token[j])); //lowercase every other letter
-                }
+                if (char.IsDigit(token[0]) && emitted == 0) builder.Append('_');
+                EmitValue(builder, token, i == (tokens.Length - 1));
+                emitted++;
             }
 
             return builder.ToString();
+        }
+
+        void EmitValue(StringBuilder builder, string token, bool last) {
+            //capitalize first letter and lowercase every other letter
+            //except if token contains numbers
+            
+            bool hasNumbers = false;
+
+            for (int i = 0; i < token.Length; i++) {
+                if (!hasNumbers && char.IsDigit(token[i])) {
+                    hasNumbers = true;
+                    break;
+                }
+            }
+
+            if (hasNumbers) {
+                builder.Append(token);
+                if (!last) builder.Append("_");
+            } else {
+                builder.Append(char.ToUpper(token[0]));
+                for (int i = 1; i < token.Length; i++) {    //every other letter
+                    builder.Append(char.ToLower(token[i]));
+                }
+            }
         }
 
         HashSet<string> Split(string enumName) {
