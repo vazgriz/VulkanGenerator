@@ -15,6 +15,7 @@ namespace SpecReader {
         public HashSet<string> IncludedCommands { get; private set; }
         public HashSet<string> IncludedTypes { get; private set; }
         public HashSet<string> ExtensionTypes { get; private set; }
+        public HashSet<string> ExtensionCommands { get; private set; }
         public Dictionary<string, string> EnumValuesMap { get; private set; }
 
         public Dictionary<string, Enum> EnumMap { get; private set; }
@@ -32,6 +33,7 @@ namespace SpecReader {
             IncludedCommands = new HashSet<string>();
             IncludedTypes = new HashSet<string>();
             ExtensionTypes = new HashSet<string>();
+            ExtensionCommands = new HashSet<string>();
             EnumValuesMap = new Dictionary<string, string>();
 
             EnumMap = new Dictionary<string, Enum>();
@@ -248,6 +250,7 @@ namespace SpecReader {
                             if (node.Name == "command") {
                                 if (requestedExtensions.Contains(eName)) {
                                     IncludedCommands.Add(node.Attributes["name"].Value);
+                                    ExtensionCommands.Add(node.Attributes["name"].Value);
                                 }
                             } else if (node.Name == "type") {
                                 string tName = node.Attributes["name"].Value;
