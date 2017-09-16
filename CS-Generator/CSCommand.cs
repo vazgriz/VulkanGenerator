@@ -8,8 +8,9 @@ namespace Generator {
         public string Name { get; set; }
         public string ReturnType { get; set; }
         public List<CSParam> Params { get; set; }
+        public bool Extension { get; set; }
 
-        public CSCommand(Command command) {
+        public CSCommand(Spec spec, Command command) {
             Name = command.Name;
             ReturnType = GetType(command.ReturnType);
             Params = new List<CSParam>();
@@ -17,6 +18,7 @@ namespace Generator {
             foreach (var p in command.Params) {
                 Params.Add(new CSParam(p));
             }
+            Extension = spec.ExtensionCommands.Contains(Name);
         }
 
         string GetType(string input) {

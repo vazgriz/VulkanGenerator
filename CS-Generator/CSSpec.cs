@@ -35,7 +35,7 @@ namespace Generator {
 
             foreach (var c in spec.Commands) {
                 if (!spec.IncludedCommands.Contains(c.Name)) continue;
-                var csc = new CSCommand(c);
+                var csc = new CSCommand(spec, c);
                 Commands.Add(csc);
             }
 

@@ -228,6 +228,8 @@ namespace Generator {
                 writer.WriteLine("        const string lib = \"vulkan-1.dll\";");
 
                 foreach (var c in spec.Commands) {
+                    if (c.Extension) continue;
+
                     bool _unsafe = false;
 
                     foreach (var p in c.Params) {
