@@ -47,7 +47,7 @@ namespace Generator {
             g.WriteEnums(output, "CSGL.Vulkan");
             g.WriteDelegates(output, "CSGL.Vulkan.Unmanaged");
             g.WriteCommands(output, "CSGL.Vulkan.Unmanaged");
-            g.WriteStructs(output, "CSGL.Vulkan");
+            g.WriteStructs(output, "CSGL.Vulkan.Unmanaged");
             //g.WriteLoader(output, "CSGL.Vulkan.Unmanaged");
             //g.WriteFunctionNames(output);
         }
