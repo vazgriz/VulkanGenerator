@@ -66,7 +66,7 @@ namespace Generator {
                 int index = e.Name.IndexOf("FlagBits");
                 string flagNames = e.Name.Substring(0, index);
                 flagNames += "Flags";
-                if (e.Name.Length > index + 8) flagNames += e.Name.Substring(index + 8, e.Name.Length - (index + 8));
+                if (e.Name.Length > index + 8) flagNames += e.Name.Substring(index + 8, e.Name.Length - (index + 8));   //preserve extension postfix
                 var flags = EnumMap[flagNames];
                 foreach (var v in e.Values) {
                     flags.Values.Add(v);
