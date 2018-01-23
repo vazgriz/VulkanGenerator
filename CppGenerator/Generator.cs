@@ -6,9 +6,9 @@ using SpecReader;
 namespace CppGenerator {
     public class Generator {
         DateTime time;
-        Spec spec;
+        CppSpec spec;
 
-        public Generator(Spec spec) {
+        public Generator(CppSpec spec) {
             this.spec = spec;
             time = DateTime.Now;
         }
@@ -18,14 +18,12 @@ namespace CppGenerator {
 
             using (var writer = File.CreateText(path)) {
                 writer.WriteLine("//auto generated on {0}", time.ToString());
+                
+                foreach (var e in spec.Enums) {
+                    writer.WriteLine("enum class {0} {{", e.Name);
 
-                foreach (var name in spec.EnumMap.Keys) {
-                    writer.WriteLine("enum class {0} {{", name);
-
-                    var e = spec.EnumMap[name];
-
-                    foreach (var value in e.Values) {
-                        writer.WriteLine("    {0},", value.Name);
+                    foreach (var v in e.Values) {
+                        writer.WriteLine("    {0},", v.Name);
                     }
 
                     writer.WriteLine("};\n");

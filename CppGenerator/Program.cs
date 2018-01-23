@@ -19,7 +19,8 @@ namespace CppGenerator {
                 spec = new Spec(doc, 1, 0, null);
             }
 
-            Generator g = new Generator(spec);
+            CppSpec cppSpec = new CppSpec(spec);
+            Generator g = new Generator(cppSpec);
             g.WriteEnums(output);
         }
     }
