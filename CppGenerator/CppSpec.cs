@@ -11,6 +11,7 @@ namespace CppGenerator {
             Enums = new List<CppEnum>();
 
             foreach (var e in spec.EnumMap.Values) {
+                if (e.Name.Contains("Flags")) continue;
                 Enums.Add(new CppEnum(e));
             }
         }
