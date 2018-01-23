@@ -120,17 +120,27 @@ namespace CppGenerator {
                 }
             }
 
-            if (hasNumbers) {
-                builder.Append(token);
-                if (index != count - 1) builder.Append("_");
-                underscoreLast = true;
-            } else {
-                builder.Append(char.ToUpper(token[0]));
-                for (int i = 1; i < token.Length; i++) {    //every other letter
-                    builder.Append(char.ToLower(token[i]));
+            bool letterLast = false;
+
+            foreach (var c in token) {
+                if (char.IsLetter(c)) {
+                    if (letterLast) {
+                        builder.Append(char.ToLower(c));
+                    } else {
+                        builder.Append(c);
+                        letterLast = true;
+                    }
+                } else {
+                    builder.Append(c);
+                    letterLast = false;
                 }
-                underscoreLast = false;
             }
+
+            if (hasNumbers) {
+                if (index != count - 1) builder.Append("_");
+            }
+
+            underscoreLast = hasNumbers;
         }
 
         HashSet<string> Split(string enumName) {
