@@ -42,6 +42,14 @@ namespace SpecReader {
             Load(doc);
         }
 
+        bool ExtensionRequested(string name) {
+            if (requestedExtensions != null) {
+                return requestedExtensions.Contains(name);
+            } else {
+                return true;
+            }
+        }
+
         void Load(XmlDocument doc) {
             var root = doc.ChildNodes[1];
             for (int i = 0; i < root.ChildNodes.Count; i++) {
@@ -248,18 +256,18 @@ namespace SpecReader {
                     foreach (XmlNode node in r.ChildNodes) {
                         if (r.Name == "require") {
                             if (node.Name == "command") {
-                                if (requestedExtensions.Contains(eName)) {
+                                if (ExtensionRequested(eName)) {
                                     IncludedCommands.Add(node.Attributes["name"].Value);
                                     ExtensionCommands.Add(node.Attributes["name"].Value);
                                 }
                             } else if (node.Name == "type") {
                                 string tName = node.Attributes["name"].Value;
-                                if (requestedExtensions.Contains(eName)) {
+                                if (ExtensionRequested(eName)) {
                                     IncludedTypes.Add(tName);
                                 }
                                 ExtensionTypes.Add(tName);
                             } else if (node.Name == "enum") {
-                                if (requestedExtensions.Contains(eName)) {
+                                if (ExtensionRequested(eName)) {
                                     var extends = node.Attributes["extends"];
                                     if (extends != null) {
                                         var name = extends.Value;
