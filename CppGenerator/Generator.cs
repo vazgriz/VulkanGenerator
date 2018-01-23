@@ -23,7 +23,7 @@ namespace CppGenerator {
                     writer.WriteLine("enum class {0} {{", e.Name);
 
                     foreach (var v in e.Values) {
-                        writer.WriteLine("    {0},", v.Name);
+                        writer.WriteLine("    {0} = {1},", v.Name, v.Value);
                     }
 
                     writer.WriteLine("};\n");

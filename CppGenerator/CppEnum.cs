@@ -25,7 +25,7 @@ namespace CppGenerator {
                 }
 
                 if (!hasNone) {
-                    Values.Add(new CppEnumValue("None"));
+                    Values.Add(new CppEnumValue("None", "0"));
                 }
             }
 
@@ -51,13 +51,22 @@ namespace CppGenerator {
 
     public class CppEnumValue {
         public string Name { get; private set; }
+        public string Value { get; private set; }
 
         public CppEnumValue(SpecReader.Enum e, EnumValue v) {
             Name = GetName(e, v);
+            string value;
+            if (v.Bitpos) {
+                value = ((int)Math.Pow(2, int.Parse(v.Value))).ToString();
+            } else {
+                value = v.Value;
+            }
+            Value = value;
         }
 
-        public CppEnumValue(string name) {
+        public CppEnumValue(string name, string value) {
             Name = name;
+            Value = value;
         }
 
         string GetName(SpecReader.Enum e, EnumValue v) {
