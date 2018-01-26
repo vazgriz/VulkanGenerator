@@ -19,16 +19,20 @@ namespace CppGenerator {
             using (var writer = File.CreateText(path)) {
                 writer.WriteLine("//auto generated on {0}", time.ToString());
                 writer.WriteLine();
+
+                writer.WriteLine("namespace vk {");
                 
                 foreach (var e in spec.Enums) {
-                    writer.WriteLine("enum class {0} {{", e.Name);
+                    writer.WriteLine("    enum class {0} {{", e.Name);
 
                     foreach (var v in e.Values) {
-                        writer.WriteLine("    {0} = {1},", v.Name, v.Value);
+                        writer.WriteLine("        {0} = {1},", v.Name, v.Value);
                     }
 
-                    writer.WriteLine("};\n");
+                    writer.WriteLine("    };\n");
                 }
+
+                writer.WriteLine("}");
             }
         }
     }
