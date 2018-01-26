@@ -24,7 +24,7 @@ namespace SpecReader {
         public Spec(XmlDocument doc, int major, int minor, List<string> extensions) {
             this.major = major;
             this.minor = minor;
-            requestedExtensions = extensions != null ? new HashSet<string>(extensions) : new HashSet<string>();
+            requestedExtensions = extensions != null ? new HashSet<string>(extensions) : null;
 
             Enums = new List<Enum>();
             AllEnums = new HashSet<string>();
