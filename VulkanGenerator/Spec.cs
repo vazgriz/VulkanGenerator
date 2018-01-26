@@ -269,10 +269,11 @@ namespace SpecReader {
                             } else if (node.Name == "enum") {
                                 if (ExtensionRequested(eName)) {
                                     var extends = node.Attributes["extends"];
-                                    if (extends != null) {
+                                    var offsetNode = node.Attributes["offset"];
+                                    if (extends != null && offsetNode != null) {
                                         var name = extends.Value;
                                         var exNumber = int.Parse(extension.Attributes["number"].Value);
-                                        var offset = int.Parse(node.Attributes["offset"].Value);
+                                        var offset = int.Parse(offsetNode.Value);
                                         var sign = 1;
                                         if (node.Attributes["dir"] != null) {
                                             sign = -1;
