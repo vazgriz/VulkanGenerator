@@ -18,6 +18,7 @@ namespace CppGenerator {
 
             using (var writer = File.CreateText(path)) {
                 writer.WriteLine("//auto generated on {0}", time.ToString());
+                writer.WriteLine();
                 
                 foreach (var e in spec.Enums) {
                     writer.WriteLine("enum class {0} {{", e.Name);
