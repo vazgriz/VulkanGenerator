@@ -9,6 +9,7 @@ namespace CppGenerator {
         public List<CppEnumValue> Values { get; private set; }
 
         public string Name { get; private set; }
+        public bool Bitmask { get; private set; }
 
         public CppEnum(SpecReader.Enum e) {
             Name = FixName(e.Name).Substring(2);
@@ -32,6 +33,8 @@ namespace CppGenerator {
             foreach (var v in e.Values) {
                 Values.Add(new CppEnumValue(e, v));
             }
+
+            Bitmask = e.Bitmask;
         }
 
         string FixName(string name) {
