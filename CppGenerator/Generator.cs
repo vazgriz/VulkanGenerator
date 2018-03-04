@@ -40,7 +40,25 @@ namespace CppGenerator {
                         writer.WriteLine("    inline {0}& operator |= ({0}& a, {0}& b) {{", e.Name);
                         writer.WriteLine("        a = static_cast<{0}>(static_cast<int>(a) | static_cast<int>(b));", e.Name);
                         writer.WriteLine("        return a;");
-                        writer.WriteLine("    }\r\n");
+                        writer.WriteLine("    }");
+                        writer.WriteLine();
+                        writer.WriteLine("    inline {0} operator & ({0} a, {0} b) {{", e.Name);
+                        writer.WriteLine("        return static_cast<{0}>(static_cast<int>(a) & static_cast<int>(b));", e.Name);
+                        writer.WriteLine("    }");
+                        writer.WriteLine();
+                        writer.WriteLine("    inline {0}& operator &= ({0}& a, {0}& b) {{", e.Name);
+                        writer.WriteLine("        a = static_cast<{0}>(static_cast<int>(a) & static_cast<int>(b));", e.Name);
+                        writer.WriteLine("        return a;");
+                        writer.WriteLine("    }");
+                        writer.WriteLine();
+                        writer.WriteLine("    inline bool operator == ({0}& a, {0}& b) {{", e.Name);
+                        writer.WriteLine("        return static_cast<int>(a) == static_cast<int>(b);");
+                        writer.WriteLine("    }");
+                        writer.WriteLine();
+                        writer.WriteLine("    inline bool operator != ({0}& a, {0}& b) {{", e.Name);
+                        writer.WriteLine("        return static_cast<int>(a) != static_cast<int>(b);");
+                        writer.WriteLine("    }");
+                        writer.WriteLine();
                     }
                 }
 
