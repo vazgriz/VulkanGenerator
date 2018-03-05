@@ -31,7 +31,11 @@ namespace CppGenerator {
                         }
                     }
 
-                    writer.WriteLine("    enum class {0} {{", name);
+                    if (e.Bitmask) {
+                        writer.WriteLine("    enum class {0} : uint32_t {{", name);
+                    } else {
+                        writer.WriteLine("    enum class {0} {{", name);
+                    }
 
                     foreach (var v in e.Values) {
                         writer.WriteLine("        {0} = {1},", v.Name, v.Value);
