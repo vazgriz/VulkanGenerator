@@ -8,11 +8,13 @@ namespace CppGenerator {
     public class CppEnum {
         public List<CppEnumValue> Values { get; private set; }
 
+        public string OriginalName { get; private set; }
         public string Name { get; private set; }
         public bool Bitmask { get; private set; }
 
-        public CppEnum(SpecReader.Enum e) {
-            Name = FixName(e.Name).Substring(2);
+        public CppEnum(SpecReader.Enum e, List<string> suffixes, Dictionary<string, int> map) {
+            OriginalName = FixName(e.Name).Substring(2);
+            Name = StripSuffix(OriginalName, suffixes, map);
 
             Values = new List<CppEnumValue>();
 
@@ -49,6 +51,27 @@ namespace CppGenerator {
             } else {
                 return name;
             }
+        }
+
+        string StripSuffix(string name, List<string> suffixes, Dictionary<string, int> map) {
+            foreach (var suffix in suffixes) {
+                int index = name.IndexOf(suffix);
+
+                if (index != -1) {
+                    string newName = name.Substring(0, index);
+                    
+                    if (map.TryGetValue(newName, out int value)) {
+                        value++;
+                        map[newName] = value;
+                    } else {
+                        map.Add(newName, 1);
+                    }
+
+                    return newName;
+                }
+            }
+
+            return name;
         }
     }
 
