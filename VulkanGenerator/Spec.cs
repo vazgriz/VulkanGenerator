@@ -8,6 +8,7 @@ namespace SpecReader {
         int minor;
         HashSet<string> requestedExtensions;
 
+        public List<string> Suffixes { get; private set; }
         public List<Enum> Enums { get; private set; }
         public HashSet<string> AllEnums { get; private set; }
         public List<Command> Commands { get; private set; }
@@ -26,6 +27,7 @@ namespace SpecReader {
             this.minor = minor;
             requestedExtensions = extensions != null ? new HashSet<string>(extensions) : null;
 
+            Suffixes = new List<string>();
             Enums = new List<Enum>();
             AllEnums = new HashSet<string>();
             Commands = new List<Command>();
@@ -55,7 +57,9 @@ namespace SpecReader {
             for (int i = 0; i < root.ChildNodes.Count; i++) {
                 var node = root.ChildNodes[i];
                 if (node is XmlComment) continue;
-                if (node.Name == "types") {
+                if (node.Name == "tags") {
+                    LoadTags(node);
+                } else if (node.Name == "types") {
                     LoadTypes(node);
                 } else if (node.Name == "enums") {
                     LoadEnums(node);
@@ -66,6 +70,13 @@ namespace SpecReader {
                 } else if (node.Name == "extensions") {
                     ResolveExtensions(node);
                 }
+            }
+        }
+
+        void LoadTags(XmlNode root) {
+            foreach (XmlNode node in root.ChildNodes) {
+                if (node is XmlComment) continue;
+                Suffixes.Add(node.Attributes["name"].Value);
             }
         }
 
