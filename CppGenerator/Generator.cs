@@ -74,6 +74,8 @@ namespace CppGenerator {
                 }
 
                 writer.WriteLine("}");
+                writer.WriteLine();
+                writer.WriteLine("static_assert(sizeof(VkResult) == sizeof(vk::Result), \"Enums are not the same size\");");
             }
         }
     }
