@@ -48,7 +48,7 @@ namespace CppGenerator {
                         writer.WriteLine("        return static_cast<{0}>(static_cast<int>(a) | static_cast<int>(b));", name);
                         writer.WriteLine("    }");
                         writer.WriteLine();
-                        writer.WriteLine("    inline {0}& operator |= ({0}& a, {0}& b) {{", name);
+                        writer.WriteLine("    inline {0}& operator |= ({0}& a, {0} b) {{", name);
                         writer.WriteLine("        a = static_cast<{0}>(static_cast<int>(a) | static_cast<int>(b));", name);
                         writer.WriteLine("        return a;");
                         writer.WriteLine("    }");
