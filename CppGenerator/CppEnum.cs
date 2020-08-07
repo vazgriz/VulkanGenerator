@@ -12,9 +12,9 @@ namespace CppGenerator {
         public string Name { get; private set; }
         public bool Bitmask { get; private set; }
 
-        public CppEnum(SpecReader.Enum e, List<string> suffixes, Dictionary<string, int> map) {
-            OriginalName = FixName(e.Name).Substring(2);
-            Name = StripSuffix(OriginalName, suffixes, map);
+        public CppEnum(Spec spec, SpecReader.Enum e, List<string> suffixes, Dictionary<string, int> map) {
+            OriginalName = FixName(e.Name);
+            Name = StripSuffix(OriginalName, suffixes, map).Substring(2);
 
             Values = new List<CppEnumValue>();
 
@@ -33,7 +33,7 @@ namespace CppGenerator {
             }
 
             foreach (var v in e.Values) {
-                Values.Add(new CppEnumValue(e, v));
+                Values.Add(new CppEnumValue(spec, e, v));
             }
 
             Bitmask = e.Bitmask;
@@ -59,15 +59,12 @@ namespace CppGenerator {
 
                 if (index != -1) {
                     string newName = name.Substring(0, index);
-                    
-                    if (map.TryGetValue(newName, out int value)) {
-                        value++;
-                        map[newName] = value;
-                    } else {
-                        map.Add(newName, 1);
-                    }
 
-                    return newName;
+                    if (map.TryGetValue(newName, out int value)) {
+                        if (value == 1) {
+                            return newName;
+                        }
+                    }
                 }
             }
 
@@ -79,7 +76,11 @@ namespace CppGenerator {
         public string Name { get; private set; }
         public string Value { get; private set; }
 
-        public CppEnumValue(SpecReader.Enum e, EnumValue v) {
+        Spec spec;
+
+        public CppEnumValue(Spec spec, SpecReader.Enum e, EnumValue v) {
+            this.spec = spec;
+
             Name = GetName(e, v);
             string value;
             if (v.Bitpos) {
@@ -124,7 +125,7 @@ namespace CppGenerator {
 
         void EmitValue(StringBuilder builder, string token, bool first, int index, int count, ref bool underscoreLast) {
             //capitalize first letter and lowercase every other letter
-            //except if token contains numbers
+            //except if token contains numbers or is a suffix
 
             bool hasNumbers = false;
             bool hasLetters = false;
@@ -146,19 +147,23 @@ namespace CppGenerator {
                 }
             }
 
-            bool letterLast = false;
+            if (index == count - 1 && spec.Suffixes.Contains(token)) {
+                builder.Append(token);  //if token is a suffix (eg KHR), preserve casing
+            } else {
+                bool letterLast = false;
 
-            foreach (var c in token) {
-                if (char.IsLetter(c)) {
-                    if (letterLast) {
-                        builder.Append(char.ToLower(c));
+                foreach (var c in token) {
+                    if (char.IsLetter(c)) {
+                        if (letterLast) {
+                            builder.Append(char.ToLower(c));
+                        } else {
+                            builder.Append(c);
+                            letterLast = true;
+                        }
                     } else {
                         builder.Append(c);
-                        letterLast = true;
+                        letterLast = false;
                     }
-                } else {
-                    builder.Append(c);
-                    letterLast = false;
                 }
             }
 

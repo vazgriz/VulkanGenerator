@@ -103,6 +103,7 @@ namespace SpecReader {
                         Structs.Add(s);
                         StructMap.Add(name, s);
                     } else if (cat == "handle") {
+                        if (node.Attributes["alias"] != null) continue;
                         string name = node["name"].InnerText;
                         List<Field> fields = new List<Field>();
                         var s = new Struct(name, fields, false);
@@ -117,6 +118,7 @@ namespace SpecReader {
                         Structs.Add(s);
                         StructMap.Add(name, s);
                     } else if (cat == "enum") {
+                        if (node.Attributes["alias"] != null) continue;
                         var eName = node.Attributes["name"].Value;
                         if (!EnumMap.ContainsKey(eName)) {
                             var e = new Enum(eName, false);
@@ -125,6 +127,7 @@ namespace SpecReader {
                             AllEnums.Add(eName);
                         }
                     } else if (cat == "bitmask") {
+                        if (node.Attributes["alias"] != null) continue;
                         var eName = node["name"].InnerText;
                         if (!EnumMap.ContainsKey(eName)) {
                             var e = new Enum(eName, true);
@@ -177,6 +180,8 @@ namespace SpecReader {
                 foreach (XmlNode node in root.ChildNodes) {
                     if (node is XmlComment) continue;
                     if (node.Name != "enum") continue;
+                    if (node.Attributes["alias"] != null) continue;
+
                     string vName = node.Attributes["name"].Value;
                     var att = node.Attributes["value"] ?? node.Attributes["bitpos"];
                     string value = att.Value;
@@ -184,10 +189,13 @@ namespace SpecReader {
                 }
                 return;
             }
+
             List<EnumValue> values = new List<EnumValue>();
             foreach (XmlNode node in root.ChildNodes) {
                 if (node is XmlComment) continue;
                 if (node.Name != "enum") continue;
+                if (node.Attributes["alias"] != null) continue;
+
                 string vName = node.Attributes["name"].Value;
                 var att = node.Attributes["value"] ?? node.Attributes["bitpos"];
                 string value = att.Value;
@@ -197,8 +205,16 @@ namespace SpecReader {
                 values.Add(v);
                 EnumValuesMap.Add(vName, value);
             }
+
             bool bitmask = root.Attributes["type"].Value == "bitmask";
-            var e = EnumMap[name];
+            Enum e;
+            if (EnumMap.ContainsKey(name)) {
+                e = EnumMap[name];
+            } else {
+                e = new Enum(name, bitmask);
+                EnumMap.Add(name, e);
+            }
+
             e.Bitmask = bitmask;
             e.Values = values;
         }
@@ -211,6 +227,8 @@ namespace SpecReader {
         }
 
         void LoadCommand(XmlNode root) {
+            if (root.Attributes["alias"] != null) return;
+
             string returnType = root["proto"]["type"].InnerText;
             string name = root["proto"]["name"].InnerText;
             List<Param> ps = new List<Param>();
@@ -281,16 +299,28 @@ namespace SpecReader {
                                 if (ExtensionRequested(eName)) {
                                     var extends = node.Attributes["extends"];
                                     var offsetNode = node.Attributes["offset"];
+                                    var extensionNumber = node.Attributes["extnumber"];
+
+                                    if (node.Attributes["alias"] != null) continue;
+
                                     if (extends != null && offsetNode != null) {
                                         var name = extends.Value;
-                                        var exNumber = int.Parse(extension.Attributes["number"].Value);
+                                        int exNumber;
+                                        if (extensionNumber != null) {
+                                            exNumber = int.Parse(extensionNumber.Value);
+                                        } else {
+                                            exNumber = 2;
+                                        }
                                         var offset = int.Parse(offsetNode.Value);
                                         var sign = 1;
+
                                         if (node.Attributes["dir"] != null) {
                                             sign = -1;
                                         }
+
                                         EnumMap[name].Extend(node.Attributes["name"].Value, exNumber, offset, sign);
                                     }
+
                                     IncludedTypes.Add(node.Attributes["name"].Value);
                                 }
                             }
